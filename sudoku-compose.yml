@@ -1,0 +1,19 @@
+version: "2.1"
+services:
+  sudoku:
+    image: ghcr.io/linuxserver/nginx
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /opt/docker/volumes/sudoku:/config
+    ports:
+      - 4444:4444
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: nginx
