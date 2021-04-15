@@ -1,0 +1,13 @@
+[Unit]
+Description=Hello landing page
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=docker-compose -f /home/lettucebowler/docker-images/gitea-compose.yml -p gitea up
+
+[Install]
+WantedBy=multi-user.target
