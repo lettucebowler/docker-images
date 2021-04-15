@@ -2,7 +2,7 @@ version: "2.1"
 services:
   hello:
     image: ghcr.io/linuxserver/nginx
-    container_name: nginx
+    container_name: hello
     environment:
       - PUID=1000
       - PGID=1000
