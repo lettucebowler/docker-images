@@ -1,0 +1,13 @@
+[Unit]
+Description=swag reverse proxy docker container
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=docker-compose -f /home/lettucebowler/docker-images/swag/docker-compose.yml -p swag up
+
+[Install]
+WantedBy=multi-user.target
