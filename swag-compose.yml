@@ -10,7 +10,7 @@ services:
       - PGID=1000
       - TZ=Europe/London
       - URL=lettucebowler.net
-      - SUBDOMAINS=notes, git,
+      - SUBDOMAINS=notes, git, sudoku, hello
       - VALIDATION=http
       - CERTPROVIDER= #optional
       - DNSPLUGIN=cloudflare #optional
