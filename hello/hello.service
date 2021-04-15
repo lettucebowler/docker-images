@@ -1,5 +1,5 @@
 [Unit]
-Description=Gitea docker container
+Description=Landing page docker container
 After=network.target
 StartLimitIntervalSec=0
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=docker-compose -f /home/lettucebowler/docker-images/gitea/docker-compose.yml -p gitea up
+ExecStart=docker-compose -f /home/lettucebowler/docker-images/hello/docker-compose.yml -p hello up
 
 [Install]
 WantedBy=multi-user.target
