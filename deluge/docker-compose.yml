@@ -11,6 +11,7 @@ services:
       - /opt/docker/volumes/deluge:/config
     ports:
       - 8112:8112
+      - 58846:58846
     restart: unless-stopped
 
 networks:
