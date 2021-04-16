@@ -9,6 +9,6 @@ server {
 	# Handle / requests
     location / {
        proxy_redirect off;
-       proxy_pass http://10.0.0.3:8112;
+       proxy_pass http://10.13.13.3:8112;
     }
 }
