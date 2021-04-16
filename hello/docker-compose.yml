@@ -10,7 +10,7 @@ services:
     volumes:
       - /opt/docker/volumes/hello:/config
     ports:
-      - 5555:5555
+      - 127.0.0.1:5555:5555
     restart: unless-stopped
 
 networks:
