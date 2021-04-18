@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+    papermc:
+        ports:
+            - '25565:25565'
+        tty: true
+        stdin_open: true
+        volumes:
+            - '/opt/docker/volumes/papermc/:/papermc'
+        restart: on-failure
+        container_name: papermc
+        environment:
+            - MC_VERSION=1.16.5
+            - PAPER_BUILD=601
+            - MC_RAM=1G
+        image: phyremaster/papermc
