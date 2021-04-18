@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=docker-compose -f /home/lettucebowler/docker-images/deluge/docker-compose.yml -p deluge up
+ExecStart=docker-compose -f /home/lettucebowler/docker-images/deluge-proxy/docker-compose.yml -p deluge-proxy up
 
 [Install]
 WantedBy=multi-user.target
