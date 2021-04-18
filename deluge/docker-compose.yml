@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - /opt/docker/volumes/deluge/config:/config
+      - /share/Torrents:/torrents
+      - /share/Downloads:/downloads
+    restart: unless-stopped
