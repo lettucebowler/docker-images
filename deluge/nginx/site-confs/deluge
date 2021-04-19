@@ -1,0 +1,16 @@
+## Version 2020/12/09
+# make sure that your dns has a cname set for deluge and that your deluge container is not using a base url
+
+server {
+    listen 8112 ;
+    client_max_body_size 0;
+
+    location / {
+        resolver 127.0.0.11 valid=30s;
+        set $upstream_app pia-vpn;
+        set $upstream_port 8112;
+        set $upstream_proto http;
+        proxy_pass $upstream_proto://$upstream_app:$upstream_port;
+
+    }
+}

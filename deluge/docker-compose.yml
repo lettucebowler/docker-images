@@ -1,9 +1,27 @@
 version: "2.1"
 services:
+  pia-vpn:
+    container_name: pia-vpn
+    image: itsdaspecialk/pia-openvpn
+    restart: always
+    cap_add:
+      - net_admin
+    dns:
+      - 209.222.18.222
+      - 209.222.18.218
+    ports:
+      - 9091:9091
+    volumes:
+      - /opt/docker/volumes/pia-vpn/config:/config:ro
+    environment:
+      REGION: "CA Ontario"
+    command: ["--auth-user-pass", "/config/auth.conf"]
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: host
+    network_mode: service:pia-vpn
+    depends_on:
+      - pia-vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -14,3 +32,21 @@ services:
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
+  proxy:
+    image: ghcr.io/linuxserver/nginx
+    container_name: proxy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+        - /opt/docker/volumes/proxy:/config
+    ports:
+      - 8112:8112
+      - 58846:58846
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: pia
