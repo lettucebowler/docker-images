@@ -12,4 +12,7 @@ services:
     volumes:
       - /opt/docker/volumes/plex/config:/config
       - /share/Media:/media
+      - /tmp:/transcode
+    devices:
+      - /dev/dri:/dev/dri
     restart: unless-stopped
