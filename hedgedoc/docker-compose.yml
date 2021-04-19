@@ -13,7 +13,8 @@ services:
       - MYSQL_PASSWORD=mariapassword
       - PGID=1000
       - PUID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
+      - CMD_ALLOW_ANONYMOUS=true
   hedgedoc:
     image: ghcr.io/linuxserver/hedgedoc:latest
     container_name: hedgedoc

@@ -9,7 +9,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
       - SERVERURL=wireguard.lettucebowler.net #optional
       - SERVERPORT=51820 #optional
       - PEERS=gengar, salazzle
