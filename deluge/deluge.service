@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=docker-compose -f /home/lettucebowler/docker-images/plex/docker-compose.yml -p plex up
+ExecStart=docker-compose -f /home/lettucebowler/docker-images/deluge/docker-compose.yml -p deluge up
 
 [Install]
 WantedBy=multi-user.target
