@@ -15,7 +15,7 @@ services:
       - PEERS=gengar
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0 #optional
-      - ALLOWEDIPS=0.0.0.0/0 #optional
+      - ALLOWEDIPS=10.13.13.1/32 #optional
     volumes:
       - /opt/docker/volumes/wireguard:/config
       - /lib/modules:/lib/modules
