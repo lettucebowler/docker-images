@@ -1,21 +1,30 @@
-version: "2.1"
+version: "3.7"
 services:
   pia-vpn:
+    image: qmcgaw/gluetun
     container_name: pia-vpn
-    image: itsdaspecialk/pia-openvpn
-    restart: always
     cap_add:
-      - net_admin
-    dns:
-      - 209.222.18.222
-      - 209.222.18.218
+      - NET_ADMIN
     ports:
-      - 9091:9091
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+      - 8000:8000/tcp # Built-in HTTP control server
+      - 80:80
+      - 443:443
+      - 58846:58846
+    # command:
     volumes:
-      - /opt/docker/volumes/pia-vpn/config:/config:ro
+      - /yourpath:/gluetun
+    secrets:
+      - openvpn_user
+      - openvpn_password
     environment:
-      REGION: "CA Ontario"
-    command: ["--auth-user-pass", "/config/auth.conf"]
+      # More variables are available, see the readme table
+      - VPNSP=private internet access
+      # Timezone for accurate logs times
+      - TZ=
+    restart: always
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
@@ -35,6 +44,8 @@ services:
   proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: proxy
+    depends_on:
+      - pia-vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -50,3 +61,9 @@ networks:
   default:
     external:
       name: pia
+
+secrets:
+  openvpn_user:
+    file: ./openvpn_user
+  openvpn_password:
+    file: ./openvpn_password
