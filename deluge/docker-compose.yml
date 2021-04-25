@@ -10,12 +10,11 @@ services:
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
       - 8000:8000/tcp # Built-in HTTP control server
-      - 80:80
-      - 443:443
       - 58846:58846
+      - 8112:8112
     # command:
     volumes:
-      - /yourpath:/gluetun
+      - /opt/docker/volumes/gluetun:/gluetun
     secrets:
       - openvpn_user
       - openvpn_password
@@ -23,7 +22,8 @@ services:
       # More variables are available, see the readme table
       - VPNSP=private internet access
       # Timezone for accurate logs times
-      - TZ=
+      - TZ=America/Chicago
+      - REGION=CA Ontario
     restart: always
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -52,9 +52,6 @@ services:
       - TZ=America/Chicago
     volumes:
         - /opt/docker/volumes/proxy:/config
-    ports:
-      - 8112:8112
-      - 58846:58846
     restart: unless-stopped
 
 networks:
