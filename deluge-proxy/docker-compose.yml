@@ -1,6 +1,6 @@
 version: "2.1"
 services:
-  sudoku:
+  deluge-proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: deluge-proxy
     environment:
