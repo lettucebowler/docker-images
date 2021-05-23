@@ -9,23 +9,14 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
-      - URL=lettucebowler.net
+      - URL=rusondia.net
       - SUBDOMAINS=notes, git, sudoku, hello, deluge
       - VALIDATION=http
-      - CERTPROVIDER= #optional
-      - DNSPLUGIN=cloudflare #optional
-      - PROPAGATION= #optional
-      - DUCKDNSTOKEN= #optional
-      - EMAIL= lettucebowler@gmail.com
-      - ONLY_SUBDOMAINS=false #optional
-      - EXTRA_DOMAINS= #optional
-      - STAGING=false #optional
-      - MAXMINDDB_LICENSE_KEY= #optional
     volumes:
       - /opt/docker/volumes/swag:/config
     ports:
       - 443:443
-      - 80:80 #optional
+      - 80:80
     restart: unless-stopped
     
 networks:
