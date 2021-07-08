@@ -12,9 +12,12 @@ services:
       - 8000:8000/tcp # Built-in HTTP control server
       - 58846:58846
       - 8112:8112
+      # - 9091:9091
+      # - 51413:51413
+      # - 51413:51413/udp
     # command:
     volumes:
-      - /opt/docker/volumes/gluetun:/gluetun
+      - /opt/docker/volumes/torrent/gluetun:/gluetun
     secrets:
       - openvpn_user
       - openvpn_password
@@ -37,10 +40,34 @@ services:
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - /opt/docker/volumes/deluge/config:/config
+      - /opt/docker/volumes/torrent/deluge/config:/config
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
+  # transmission:
+  #     image: ghcr.io/linuxserver/transmission
+  #     container_name: transmission
+  #     network_mode: service:pia-vpn
+  #     depends_on:
+  #       - pia-vpn
+  #     environment:
+  #       - PUID=1000
+  #       - PGID=1000
+  #       - TZ=America/Chicago
+  #       # - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+  #       - USER=lettucebowler #optional
+  #       - PASS=rusondia13 #optional
+  #       # - WHITELIST=iplist #optional
+  #       # - HOST_WHITELIST=dnsnane list #optional
+  #     volumes:
+  #       - /opt/docker/volumes/torrent/transmission/config:/config
+  #       - /share/Downloads:/downloads
+  #       - /share/Torrents:/watch
+  #     # ports:
+  #     #   - 9091:9091
+  #     #   - 51413:51413
+  #     #   - 51413:51413/udp
+  #     restart: unless-stopped
   proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: proxy
@@ -51,7 +78,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-        - /opt/docker/volumes/proxy:/config
+        - /opt/docker/volumes/torrent/proxy:/config
     restart: unless-stopped
 
 networks:
