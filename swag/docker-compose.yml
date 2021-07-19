@@ -10,7 +10,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
       - URL=rusondia.net
-      - SUBDOMAINS=notes, git, sudoku, hello, deluge
+      - SUBDOMAINS=notes, git, sudoku, hello, deluge, components
       - VALIDATION=http
     volumes:
       - /opt/docker/volumes/swag:/config
