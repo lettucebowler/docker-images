@@ -1,39 +1,60 @@
 version: "3.7"
 services:
-  pia-vpn:
-    image: qmcgaw/gluetun
-    container_name: pia-vpn
+  express-vpn:
+    container_name: express-vpn
+    image: polkaned/expressvpn
+    environment:
+      - ACTIVATION_CODE=E6CX9SFB3PPW5QLMSHVSWXR
+      - SERVER=usch
     cap_add:
       - NET_ADMIN
-    ports:
-      - 8888:8888/tcp # HTTP proxy
-      - 8388:8388/tcp # Shadowsocks
-      - 8388:8388/udp # Shadowsocks
-      - 8000:8000/tcp # Built-in HTTP control server
+    devices:
+      - /dev/net/tun
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    privileged: true
+    restart: unless-stopped
+    ports: 
       - 58846:58846
       - 8112:8112
+
+#  pia-vpn:
+#    image: qmcgaw/gluetun
+#    container_name: pia-vpn
+#    cap_add:
+#      - NET_ADMIN
+#    ports:
+#      - 8888:8888/tcp # HTTP proxy
+#      - 8388:8388/tcp # Shadowsocks
+#      - 8388:8388/udp # Shadowsocks
+#      - 8000:8000/tcp # Built-in HTTP control server
+#      - 58846:58846
+#      - 8112:8112
       # - 9091:9091
       # - 51413:51413
       # - 51413:51413/udp
     # command:
-    volumes:
-      - /opt/docker/volumes/torrent/gluetun:/gluetun
-    secrets:
-      - openvpn_user
-      - openvpn_password
-    environment:
+#    volumes:
+#      - /opt/docker/volumes/torrent/gluetun:/gluetun
+#    secrets:
+#      - openvpn_user
+#      - openvpn_password
+#    environment:
       # More variables are available, see the readme table
-      - VPNSP=private internet access
+#      - VPNSP=private internet access
       # Timezone for accurate logs times
-      - TZ=America/Chicago
-      - REGION=CA Ontario
-    restart: always
+#      - TZ=America/Chicago
+ #     - REGION=CA Ontario
+#    restart: always
+
+
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: service:pia-vpn
+    network_mode: service:express-vpn
     depends_on:
-      - pia-vpn
+      - express-vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -72,7 +93,7 @@ services:
     image: ghcr.io/linuxserver/nginx
     container_name: proxy
     depends_on:
-      - pia-vpn
+      - express-vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -84,7 +105,7 @@ services:
 networks:
   default:
     external:
-      name: pia
+      name: express
 
 secrets:
   openvpn_user:
