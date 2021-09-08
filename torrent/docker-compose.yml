@@ -1,60 +1,42 @@
 version: "3.7"
 services:
-  express-vpn:
-    container_name: express-vpn
-    image: polkaned/expressvpn
-    environment:
-      - ACTIVATION_CODE=E6CX9SFB3PPW5QLMSHVSWXR
-      - SERVER=usch
+  vpn:
+    container_name: vpn
+    image: thrnz/docker-wireguard-pia
+    volumes:
+      # Auth token is stored here
+      - /opt/docker/volumes/torrent/pia/conf:/pia
+      # If enabled, the forwarded port is dumped to /pia-shared/port.dat for potential use in other containers
+      - /opt/docker/volumes/torrent/pia/shared:/pia-shared
     cap_add:
       - NET_ADMIN
-    devices:
-      - /dev/net/tun
-    stdin_open: true
-    tty: true
-    command: /bin/bash
-    privileged: true
-    restart: unless-stopped
+    environment:
+      - LOC=us_chicago
+      - LOCAL_NETWORK=192.168.192.0/24 10.13.13.0/24
+      - KEEPALIVE=25
+    sysctls:
+      # wg-quick fails to set this without --privileged, so set it here instead if needed
+      - net.ipv4.conf.all.src_valid_mark=1
+      # May as well disable ipv6. Should be blocked anyway.
+      - net.ipv6.conf.default.disable_ipv6=1
+      - net.ipv6.conf.all.disable_ipv6=1
+      - net.ipv6.conf.lo.disable_ipv6=1
+    # The container has no recovery logic. Use a healthcheck to catch disconnects.
+    healthcheck:
+      test: ping -c 1 www.google.com || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
     ports: 
       - 58846:58846
       - 8112:8112
-
-#  pia-vpn:
-#    image: qmcgaw/gluetun
-#    container_name: pia-vpn
-#    cap_add:
-#      - NET_ADMIN
-#    ports:
-#      - 8888:8888/tcp # HTTP proxy
-#      - 8388:8388/tcp # Shadowsocks
-#      - 8388:8388/udp # Shadowsocks
-#      - 8000:8000/tcp # Built-in HTTP control server
-#      - 58846:58846
-#      - 8112:8112
-      # - 9091:9091
-      # - 51413:51413
-      # - 51413:51413/udp
-    # command:
-#    volumes:
-#      - /opt/docker/volumes/torrent/gluetun:/gluetun
-#    secrets:
-#      - openvpn_user
-#      - openvpn_password
-#    environment:
-      # More variables are available, see the readme table
-#      - VPNSP=private internet access
-      # Timezone for accurate logs times
-#      - TZ=America/Chicago
- #     - REGION=CA Ontario
-#    restart: always
-
-
+  
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: service:express-vpn
+    network_mode: service:vpn
     depends_on:
-      - express-vpn
+      - vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -65,50 +47,8 @@ services:
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
-  # transmission:
-  #     image: ghcr.io/linuxserver/transmission
-  #     container_name: transmission
-  #     network_mode: service:pia-vpn
-  #     depends_on:
-  #       - pia-vpn
-  #     environment:
-  #       - PUID=1000
-  #       - PGID=1000
-  #       - TZ=America/Chicago
-  #       # - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-  #       - USER=lettucebowler #optional
-  #       - PASS=rusondia13 #optional
-  #       # - WHITELIST=iplist #optional
-  #       # - HOST_WHITELIST=dnsnane list #optional
-  #     volumes:
-  #       - /opt/docker/volumes/torrent/transmission/config:/config
-  #       - /share/Downloads:/downloads
-  #       - /share/Torrents:/watch
-  #     # ports:
-  #     #   - 9091:9091
-  #     #   - 51413:51413
-  #     #   - 51413:51413/udp
-  #     restart: unless-stopped
-  proxy:
-    image: ghcr.io/linuxserver/nginx
-    container_name: proxy
-    depends_on:
-      - express-vpn
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-        - /opt/docker/volumes/torrent/proxy:/config
-    restart: unless-stopped
 
 networks:
   default:
     external:
-      name: express
-
-secrets:
-  openvpn_user:
-    file: ./openvpn_user
-  openvpn_password:
-    file: ./openvpn_password
+      name: vpn
