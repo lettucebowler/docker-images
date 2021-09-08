@@ -11,6 +11,6 @@ services:
         container_name: papermc
         environment:
             - MC_VERSION=1.17.1
-            - PAPER_BUILD=170
+            - PAPER_BUILD=251
             - MC_RAM=2G
         image: phyremaster/papermc
