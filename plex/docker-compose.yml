@@ -10,7 +10,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /opt/docker/volumes/plex/config:/config
+      - ../../volumes/plex/config:/config
       - /share/Media:/media
       - /tmp:/transcode
     devices:

@@ -5,7 +5,7 @@ services:
     image: thrnz/docker-wireguard-pia
     volumes:
       # Auth token is stored here
-      - /opt/docker/volumes/torrent/pia/conf:/pia
+      - ../../volumes/torrent/pia/conf:/pia
     cap_add:
       - NET_ADMIN
     environment:
@@ -37,7 +37,7 @@ services:
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - /opt/docker/volumes/torrent/deluge/config:/config
+      - ../../volumes/torrent/deluge/config:/config
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
@@ -49,7 +49,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /opt/docker/volumes/torrent/proxy:/config
+      - ../../volumes/torrent/proxy:/config
     ports:
       - 8112:8112
       - 58846:58846
