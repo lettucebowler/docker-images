@@ -13,7 +13,7 @@ services:
       - SUBDOMAINS=notes, git, sudoku, hello, deluge, components
       - VALIDATION=http
     volumes:
-      - /opt/docker/volumes/swag:/config
+      - ../../volumes/swag/config:/config
     ports:
       - 443:443
       - 80:80

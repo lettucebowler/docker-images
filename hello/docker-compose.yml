@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /opt/docker/volumes/hello:/config
+      - ../../volumes/hello/config:/config
     ports:
       - 127.0.0.1:5555:5555
     restart: unless-stopped
