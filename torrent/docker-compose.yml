@@ -12,7 +12,7 @@ services:
       - NET_ADMIN
     environment:
       - LOC=us_chicago
-      - LOCAL_NETWORK=192.168.192.0/24 10.13.13.0/24 172.17.0.0/16
+      - LOCAL_NETWORK=172.17.0.0/16
       - KEEPALIVE=25
     sysctls:
       # wg-quick fails to set this without --privileged, so set it here instead if needed
