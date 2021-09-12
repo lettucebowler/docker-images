@@ -6,8 +6,6 @@ services:
     volumes:
       # Auth token is stored here
       - /opt/docker/volumes/torrent/pia/conf:/pia
-      # If enabled, the forwarded port is dumped to /pia-shared/port.dat for potential use in other containers
-      - /opt/docker/volumes/torrent/pia/shared:/pia-shared
     cap_add:
       - NET_ADMIN
     environment:
@@ -27,9 +25,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    # ports: 
-    #   - 58846:58846
-    #   - 8112:8112
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
