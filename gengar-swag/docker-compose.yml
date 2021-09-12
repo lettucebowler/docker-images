@@ -11,6 +11,7 @@ services:
       - TZ=America/Chicago
       - URL=lettucebowler.net
       - SUBDOMAINS=deluge
+      - ONLY_SUBDOMAINS=true
       - VALIDATION=http
     volumes:
       - ../../volumes/gengar-swag/config:/config
