@@ -2,11 +2,11 @@ version: '3.3'
 services:
     papermc:
         ports:
-            - '25565:25565'
+            - 25565:25565
         tty: true
         stdin_open: true
         volumes:
-            - '/opt/docker/volumes/papermc/:/papermc'
+            - ./papermc/:/papermc
         restart: on-failure
         container_name: papermc
         environment:
