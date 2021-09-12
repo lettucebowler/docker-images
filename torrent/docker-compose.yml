@@ -12,7 +12,7 @@ services:
       - NET_ADMIN
     environment:
       - LOC=us_chicago
-      - LOCAL_NETWORK=192.168.192.0/24 10.13.13.0/24
+      - LOCAL_NETWORK=192.168.192.0/24 10.13.13.0/24 172.17.0.0/16
       - KEEPALIVE=25
     sysctls:
       # wg-quick fails to set this without --privileged, so set it here instead if needed
@@ -27,10 +27,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    ports: 
-      - 58846:58846
-      - 8112:8112
-  
+    # ports: 
+    #   - 58846:58846
+    #   - 8112:8112
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
@@ -46,6 +45,19 @@ services:
       - /opt/docker/volumes/torrent/deluge/config:/config
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
+    restart: unless-stopped
+  torrent-proxy:
+    image: ghcr.io/linuxserver/nginx
+    container_name: torrent-proxy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/torrent/proxy:/config
+    ports:
+      - 8112:8112
+      - 58846:58846
     restart: unless-stopped
 
 networks:
