@@ -4,7 +4,6 @@ services:
     container_name: vpn
     image: thrnz/docker-wireguard-pia
     volumes:
-      # Auth token is stored here
       - ../../volumes/torrent/pia/conf:/pia
     cap_add:
       - NET_ADMIN
@@ -13,18 +12,16 @@ services:
       - LOCAL_NETWORK=172.17.0.0/16
       - KEEPALIVE=25
     sysctls:
-      # wg-quick fails to set this without --privileged, so set it here instead if needed
       - net.ipv4.conf.all.src_valid_mark=1
-      # May as well disable ipv6. Should be blocked anyway.
       - net.ipv6.conf.default.disable_ipv6=1
       - net.ipv6.conf.all.disable_ipv6=1
       - net.ipv6.conf.lo.disable_ipv6=1
-    # The container has no recovery logic. Use a healthcheck to catch disconnects.
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
+
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
@@ -41,6 +38,7 @@ services:
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
+
   torrent-proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: torrent-proxy
