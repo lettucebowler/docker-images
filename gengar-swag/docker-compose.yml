@@ -10,7 +10,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
       - URL=lettucebowler.net
-      - SUBDOMAINS=deluge, mc, home
+      - SUBDOMAINS=deluge, mc, home, plex
       - ONLY_SUBDOMAINS=true
       - VALIDATION=http
     volumes:
