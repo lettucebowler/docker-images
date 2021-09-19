@@ -1,6 +1,7 @@
 version: '3'
 services:
   nginx-proxy-manager:
+    container_name: 'nginx-proxy-manager'
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     ports:
@@ -17,6 +18,7 @@ services:
       - /opt/docker/volumes/gengar-proxy/data:/data
       - /opt/docker/volumes/gengar-proxy/letsencrypt:/etc/letsencrypt
   npm-db:
+    container_name: 'npm-db'
     image: 'jc21/mariadb-aria:latest'
     restart: unless-stopped
     environment:
