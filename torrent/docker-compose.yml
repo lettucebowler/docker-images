@@ -4,7 +4,7 @@ services:
     container_name: vpn
     image: thrnz/docker-wireguard-pia
     volumes:
-      - ../../volumes/torrent/pia/conf:/pia
+      - /opt/docker/volumes/torrent/pia/conf:/pia
     cap_add:
       - NET_ADMIN
     environment:
@@ -34,7 +34,7 @@ services:
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - ../../volumes/torrent/deluge/config:/config
+      - /opt/docker/volumes/torrent/deluge/config:/config
       - /share/Torrents:/torrents
       - /share/Downloads:/downloads
     restart: unless-stopped
@@ -47,7 +47,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - ../../volumes/torrent/proxy:/config
+      - /opt/docker/volumes/torrent/proxy:/config
     ports:
       - 8112:8112
       - 58846:58846

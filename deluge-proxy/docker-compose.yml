@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - ../../volumes/deluge-proxy/config:/config
+      - /opt/docker/volumes/deluge-proxy/config:/config
     ports:
       - 127.0.0.1:8112:8112
       - 58846:58846

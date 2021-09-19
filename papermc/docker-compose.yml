@@ -6,7 +6,7 @@ services:
         tty: true
         stdin_open: true
         volumes:
-            - ../../volumes/papermc/:/papermc
+            - /opt/docker/volumes/papermc/:/papermc
         restart: on-failure
         container_name: papermc
         environment:

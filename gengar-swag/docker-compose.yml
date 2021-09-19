@@ -14,7 +14,7 @@ services:
       - ONLY_SUBDOMAINS=true
       - VALIDATION=http
     volumes:
-      - ../../volumes/gengar-swag/config:/config
+      - /opt/docker/volumes/gengar-swag/config:/config
     ports:
       - 443:443
       - 80:80
