@@ -26,7 +26,7 @@ services:
       MYSQL_PASSWORD: 'npm'
     volumes:
       - /opt/docker/volumes/gengar-proxy/data/mysql:/var/lib/mysql
-  networks:
-    default:
-      external:
-        name: nginx
+networks:
+  default:
+    external:
+      name: nginx
