@@ -21,6 +21,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    ports:
+     - 8112:8112
 
   deluge:
     image: ghcr.io/linuxserver/deluge
