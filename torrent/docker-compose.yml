@@ -21,8 +21,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    ports:
-     - 8112:8112
 
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -41,7 +39,7 @@ services:
       - /share/Downloads:/downloads
     restart: unless-stopped
 
-  deluge-daemon-proxy:
+  torrent-proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: torrent-proxy
     environment:
@@ -52,6 +50,7 @@ services:
       - /opt/docker/volumes/torrent/proxy:/config
     ports:
       - 58846:58846
+      - 8112:8112
     restart: unless-stopped
 
 networks:
