@@ -39,7 +39,7 @@ services:
       - /share/Downloads:/downloads
     restart: unless-stopped
 
-  torrent-proxy:
+  deluge-daemon-proxy:
     image: ghcr.io/linuxserver/nginx
     container_name: torrent-proxy
     environment:
@@ -49,7 +49,6 @@ services:
     volumes:
       - /opt/docker/volumes/torrent/proxy:/config
     ports:
-      - 8112:8112
       - 58846:58846
     restart: unless-stopped
 
