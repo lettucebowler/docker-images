@@ -1,5 +1,5 @@
 server {
-	listen 8085;	
+	listen 80;	
 	
 	root /config/www/;
 	index index.html index.htm index.php;
