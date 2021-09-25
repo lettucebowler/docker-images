@@ -39,21 +39,6 @@ services:
       - /share/Downloads:/downloads
     restart: unless-stopped
 
-  torrent-proxy:
-    image: ghcr.io/linuxserver/nginx
-    container_name: torrent-proxy
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /opt/docker/volumes/torrent/proxy:/config
-    ports:
-      - 58846:58846
-      - 8112:8112
-      - 9117:9117
-    restart: unless-stopped
-
   sonarr:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
