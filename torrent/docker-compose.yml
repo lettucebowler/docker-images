@@ -39,6 +39,22 @@ services:
       - /share/Downloads:/downloads
     restart: unless-stopped
 
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/torrent/radarr/config:/config
+      - /share/Media/Movies:/movies #optional
+      - /share/Downloads:/downloads #optional
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+    restart: unless-stopped
+
   sonarr:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
@@ -69,6 +85,17 @@ services:
     network_mode: service:vpn
     depends_on:
       - vpn
+    restart: unless-stopped
+
+  ombi:
+    image: ghcr.io/linuxserver/ombi
+    container_name: ombi
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/torrent/ombi/config:/config
     restart: unless-stopped
 
 networks:
