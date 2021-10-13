@@ -91,17 +91,6 @@ services:
       - vpn
     restart: unless-stopped
 
-  ombi:
-    image: ghcr.io/linuxserver/ombi
-    container_name: ombi
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /opt/docker/volumes/torrent/ombi/config:/config
-    restart: unless-stopped
-
 networks:
   default:
     external:
