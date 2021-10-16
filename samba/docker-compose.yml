@@ -5,7 +5,9 @@ services:
     container_name: samba
     image: dperson/samba:latest
     environment:
-      TZ: America/Chicago
+      - USERID=1000
+      - GROUPID=1000
+      - TZ=America/Chicago
     ports:
       - "137:137/udp"
       - "138:138/udp"
@@ -16,4 +18,4 @@ services:
     tty: true
     volumes:
       - /share:/share:z
-    command: '-s "share;/share;yes;no;yes" -p'
+    command: '-s "share;/share;yes;no;yes" -u "lettucebowler;lettucebowler;1000;lettucebowler;1000" -p'
