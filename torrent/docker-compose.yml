@@ -5,10 +5,14 @@ services:
     image: thrnz/docker-wireguard-pia
     volumes:
       - /opt/docker/volumes/torrent/pia/conf:/pia
+      - /opt/docker/volumes/torrent/pia/pia-shared:/pia-shared
     cap_add:
       - NET_ADMIN
     environment:
-      - LOC=us_chicago
+      #- LOC=us_chicago
+      - LOC=ca_toronto
+      - PORT_PERSIST=1
+      - PORT_FORWARDING=1
       - LOCAL_NETWORK=172.17.0.0/16
       - KEEPALIVE=25
     sysctls:
@@ -73,6 +77,19 @@ services:
       - vpn
       - deluge
       - jackett
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/torrent/lidarr/config:/config
+      - /share/Media/Music:/music
+      - /share/Downloads:/downloads
     restart: unless-stopped
 
   jackett:
