@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/sonarr/config:/config
+      - /share/Media/Shows:/tv #optional
+      - /share/Downloads:/downloads #optional
+    restart: unless-stopped
+
+  sonarr-proxy:
+    image: erisamoe/cloudflared
+    container_name: sonarr-proxy
+    volumes:
+      - /opt/docker/volumes/cloudflared:/etc/cloudflared
+    command: --hostname sonarr.lettucebowler.net --url http://sonarr:8989
+    depends_on:
+      - sonarr

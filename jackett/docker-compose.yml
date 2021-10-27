@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  jackett:
+    image: ghcr.io/linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - AUTO_UPDATE=false #optional
+    volumes:
+      - /opt/docker/volumes/jackett/config:/config
+      - /share/Downloads:/downloads
+    restart: unless-stopped
+
+  jackett-proxy:
+    image: erisamoe/cloudflared
+    container_name: jackett-proxy
+    volumes:
+      - /opt/docker/volumes/cloudflared:/etc/cloudflared
+    command: --hostname jackett.lettucebowler.net --url http://jackett:9117
+    depends_on:
+      - jackett
+
+networks:
+  default:
+    external:
+      name: nginx
+

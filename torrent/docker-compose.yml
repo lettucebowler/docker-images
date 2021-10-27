@@ -10,11 +10,10 @@ services:
       - NET_ADMIN
     environment:
       - LOC=us_chicago
-      #- LOC=ca_toronto
-      #- PORT_PERSIST=1
-      #- PORT_FORWARDING=1
-      - LOCAL_NETWORK=172.17.0.0/16
+      - LOCAL_NETWORK=172.17.0.0/16, 10.13.13.0/24
       - KEEPALIVE=25
+    ports:
+      - 58846:58846
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.default.disable_ipv6=1
@@ -43,70 +42,15 @@ services:
       - /share/Downloads:/downloads
     restart: unless-stopped
 
-  radarr:
-    image: ghcr.io/linuxserver/radarr
-    container_name: radarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
+  deluge-proxy:
+    image: erisamoe/cloudflared
+    container_name: deluge-proxy
     volumes:
-      - /opt/docker/volumes/torrent/radarr/config:/config
-      - /share/Media/Movies:/movies #optional
-      - /share/Downloads:/downloads #optional
-    network_mode: service:vpn
+      - /opt/docker/volumes/cloudflared:/etc/cloudflared
+    command: --hostname deluge.lettucebowler.net --url http://vpn:8112
     depends_on:
       - vpn
       - deluge
-      - jackett
-    restart: unless-stopped
-
-  sonarr:
-    image: ghcr.io/linuxserver/sonarr
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /opt/docker/volumes/torrent/sonarr/config:/config
-      - /share/Media/Shows:/tv #optional
-      - /share/Downloads:/downloads #optional
-    network_mode: service:vpn
-    depends_on:
-      - vpn
-      - deluge
-      - jackett
-    restart: unless-stopped
-
-  lidarr:
-    image: lscr.io/linuxserver/lidarr
-    container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /opt/docker/volumes/torrent/lidarr/config:/config
-      - /share/Media/Music:/music
-      - /share/Downloads:/downloads
-    restart: unless-stopped
-
-  jackett:
-    image: ghcr.io/linuxserver/jackett
-    container_name: jackett
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-      - AUTO_UPDATE=false #optional
-    volumes:
-      - /opt/docker/volumes/torrent/jackett/config:/config
-      - /share/Downloads:/downloads
-    network_mode: service:vpn
-    depends_on:
-      - vpn
-    restart: unless-stopped
 
 networks:
   default:
