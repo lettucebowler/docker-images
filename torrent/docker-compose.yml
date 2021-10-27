@@ -9,10 +9,10 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      #- LOC=us_chicago
-      - LOC=ca_toronto
-      - PORT_PERSIST=1
-      - PORT_FORWARDING=1
+      - LOC=us_chicago
+      #- LOC=ca_toronto
+      #- PORT_PERSIST=1
+      #- PORT_FORWARDING=1
       - LOCAL_NETWORK=172.17.0.0/16
       - KEEPALIVE=25
     sysctls:
