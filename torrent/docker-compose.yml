@@ -14,6 +14,7 @@ services:
       - KEEPALIVE=25
     ports:
       - 58846:58846
+      - 8112:8112
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.default.disable_ipv6=1
