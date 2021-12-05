@@ -10,7 +10,7 @@ services:
       - NET_ADMIN
     environment:
       - LOC=us_chicago
-      - LOCAL_NETWORK=172.17.0.0/16, 10.13.13.0/24
+      - LOCAL_NETWORK=172.17.0.0/16, 10.13.13.0/24 192.168.192.0/24
       - KEEPALIVE=25
     ports:
       - 58846:58846
