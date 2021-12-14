@@ -10,7 +10,7 @@ services:
         restart: on-failure
         container_name: papermc
         environment:
-            - MC_VERSION=1.17.1
-            - PAPER_BUILD=399
+            - MC_VERSION=1.18.1
+            - PAPER_BUILD=74
             - MC_RAM=2G
         image: phyremaster/papermc
