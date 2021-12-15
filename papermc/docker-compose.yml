@@ -13,4 +13,4 @@ services:
             - MC_VERSION=1.18.1
             - PAPER_BUILD=74
             - MC_RAM=2G
-        image: phyremaster/papermc
+        image: hchasens/papermc:1.18.1
