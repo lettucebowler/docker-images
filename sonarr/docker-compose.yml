@@ -9,8 +9,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
-      - /share/Media/Shows:/tv #optional
-      - /share/Downloads:/downloads #optional
+      - /mnt/truenas/Media/Shows:/tv #optional
+      - /opt/docker/volumes/torrent/downloads:/downloads #optional
     restart: unless-stopped
 
   sonarr-proxy:

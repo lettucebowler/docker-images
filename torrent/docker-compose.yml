@@ -39,8 +39,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
-      - /share/Torrents:/torrents
-      - /share/Downloads:/downloads
+      - /opt/docker/volumes/torrent/downloads:/downloads
     restart: unless-stopped
 
   deluge-proxy:

@@ -11,7 +11,7 @@ services:
       - PLEX_CLAIM= #optional
     volumes:
       - /opt/docker/volumes/plex/config:/config
-      - /share/Media:/media
+      - /mnt/truenas/Media:/media
       - /tmp:/transcode
     devices:
       - /dev/dri:/dev/dri
