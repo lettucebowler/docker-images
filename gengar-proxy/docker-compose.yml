@@ -8,7 +8,9 @@ services:
       - '80:80'
       - '81:81'
       - '443:443'
-      - 58846:58846
+      - 8443:8443
+      - 8081:8081
+      - 8112:8112
     environment:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
