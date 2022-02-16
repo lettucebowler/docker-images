@@ -10,14 +10,10 @@ services:
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
       - /mnt/truenas/Media/Shows:/tv #optional
-      - /opt/docker/volumes/torrent/downloads:/downloads #optional
+      - /mnt/truenas/Share/Downloads:/downloads #optional
     restart: unless-stopped
 
-  sonarr-proxy:
-    image: erisamoe/cloudflared
-    container_name: sonarr-proxy
-    volumes:
-      - /opt/docker/volumes/cloudflared:/etc/cloudflared
-    command: --hostname sonarr.lettucebowler.net --url http://sonarr:8989
-    depends_on:
-      - sonarr
+networks:
+  default:
+    external:
+      name: nginx

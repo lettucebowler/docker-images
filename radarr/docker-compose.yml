@@ -10,17 +10,8 @@ services:
     volumes:
       - /opt/docker/volumes/radarr/config:/config
       - /mnt/truenas/Media/Movies:/movies #optional
-      - /opt/docker/volumes/torrent/downloads:/downloads #optional
+      - /mnt/truenas/Share/Downloads:/downloads #optional
     restart: unless-stopped
-
-  radarr-proxy:
-    image: erisamoe/cloudflared
-    container_name: radarr-proxy
-    volumes:
-      - /opt/docker/volumes/cloudflared:/etc/cloudflared
-    command: --hostname radarr.lettucebowler.net --url http://radarr:7878
-    depends_on:
-      - radarr
 
 networks:
   default:
