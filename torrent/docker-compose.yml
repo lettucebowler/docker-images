@@ -9,12 +9,12 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      - LOC=us_chicago
-      - LOCAL_NETWORK=172.17.0.0/16, 10.13.13.0/24 192.168.192.0/24
+      - LOC=ca_ontario
+      - LOCAL_NETWORK=172.17.0.0/16, 192.168.192.0/24
       - KEEPALIVE=25
-    ports:
-      - 58846:58846
-      - 8112:8112
+      - PORT_FORWARDING=1
+      - PORT_PERSIST=1
+      - WG_USERSPACE=1
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.default.disable_ipv6=1
@@ -39,18 +39,8 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
-      - /opt/docker/volumes/torrent/downloads:/downloads
+      - /mnt/truenas/Share/Downloads:/downloads
     restart: unless-stopped
-
-  deluge-proxy:
-    image: erisamoe/cloudflared
-    container_name: deluge-proxy
-    volumes:
-      - /opt/docker/volumes/cloudflared:/etc/cloudflared
-    command: --hostname deluge.lettucebowler.net --url http://vpn:8112
-    depends_on:
-      - vpn
-      - deluge
 
 networks:
   default:
