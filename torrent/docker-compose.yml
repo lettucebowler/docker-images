@@ -10,7 +10,7 @@ services:
       - NET_ADMIN
     environment:
       - LOC=ca_ontario
-      - LOCAL_NETWORK=172.17.0.0/16, 192.168.192.0/24
+      - LOCAL_NETWORK=172.17.0.0/16, 100.0.0.0/8
       - KEEPALIVE=25
       - PORT_FORWARDING=1
       - PORT_PERSIST=1
@@ -25,6 +25,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    ports:
+      - 8112:8112
+      - 58846:58846
 
   deluge:
     image: ghcr.io/linuxserver/deluge
