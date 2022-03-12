@@ -1,30 +1,16 @@
 version: "3.7"
 services:
-  vpn:
-    container_name: vpn
-    image: thrnz/docker-wireguard-pia
-    volumes:
-      - /opt/docker/volumes/torrent/pia/conf:/pia
-      - /opt/docker/volumes/torrent/pia/pia-shared:/pia-shared
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
     cap_add:
       - NET_ADMIN
     environment:
-      - LOC=ca_ontario
-      - LOCAL_NETWORK=172.17.0.0/16, 100.0.0.0/8
-      - KEEPALIVE=25
-      - PORT_FORWARDING=1
-      - PORT_PERSIST=1
-      - WG_USERSPACE=1
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv6.conf.default.disable_ipv6=1
-      - net.ipv6.conf.all.disable_ipv6=1
-      - net.ipv6.conf.lo.disable_ipv6=1
-    healthcheck:
-      test: ping -c 1 www.google.com || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_TYPE=wireguard
+      - WIREGUARD_ADDRESSES=10.66.129.114/32
+      - SERVER_CITIES=Chicago IL
+      - FIREWALL_VPN_INPUT_PORTS=57120
     ports:
       - 8112:8112
       - 58846:58846
@@ -32,9 +18,9 @@ services:
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: service:vpn
+    network_mode: service:gluetun
     depends_on:
-      - vpn
+      - gluetun
     environment:
       - PUID=1000
       - PGID=1000
