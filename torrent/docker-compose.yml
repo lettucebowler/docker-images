@@ -10,7 +10,8 @@ services:
       - VPN_TYPE=wireguard
       - WIREGUARD_ADDRESSES=10.66.129.114/32
       - SERVER_CITIES=Chicago IL
-      - FIREWALL_VPN_INPUT_PORTS=57120
+      - FIREWALL_VPN_INPUT_PORTS=<port>
+      - WIREGUARD_PRIVATE_KEY=<key>
     ports:
       - 8112:8112
       - 58846:58846
@@ -28,6 +29,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
+      - /opt/docker/volumes/torrent/deluge/downloads:/torrents
       - /mnt/truenas/Share/Downloads:/downloads
     restart: unless-stopped
 
