@@ -10,7 +10,7 @@ services:
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
       - /mnt/truenas/Media/Shows:/tv #optional
-      - /opt/docker/volumes/torrent/deluge/downloads:/torrents #optional
+      - /home/lettucebowler/downloads:/torrents #optional
     restart: unless-stopped
 
 networks:
