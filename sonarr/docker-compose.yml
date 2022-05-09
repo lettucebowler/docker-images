@@ -11,6 +11,7 @@ services:
       - /opt/docker/volumes/sonarr/config:/config
       - /mnt/truenas/Media/Shows:/tv #optional
       - /home/lettucebowler/downloads:/torrents #optional
+      - /mnt/truenas/Share/Downloads:/downloads
     restart: unless-stopped
 
 networks:
