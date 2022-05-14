@@ -11,6 +11,6 @@ services:
         container_name: papermc
         environment:
             - MC_VERSION=1.18.2
-            - PAPER_BUILD=272
+            - PAPER_BUILD=333
             - MC_RAM=2G
         image: hchasens/papermc:1.18.1
