@@ -8,7 +8,15 @@ services:
       ONLINE_MODE: "FALSE"
       TYPE: "PAPER"
       VERSION: "1.19"
+      OPS: "lettucebowler"
+      WHITELIST: "lettucebowler"
+      DIFFICULTY: "normal"
+      ALLOW_NETHER: "TRUE"
+      SERVER_NAME: "LettuceCraft"
+      MEMORY: "2G"
+      ENABLE_AUTOPAUSE: "TRUE"
+      MAX_TICK_TIME: "-1"
     volumes:
       - /opt/docker/volumes/papermc:/data
     ports:
-      - "25565:25565"
+      - 25565:25565
