@@ -5,7 +5,6 @@ services:
     image: itzg/minecraft-server
     environment:
       EULA: "TRUE"
-      ONLINE_MODE: "FALSE"
       TYPE: "PAPER"
       VERSION: "1.19"
       OPS: "lettucebowler"
@@ -14,8 +13,6 @@ services:
       ALLOW_NETHER: "TRUE"
       SERVER_NAME: "LettuceCraft"
       MEMORY: "2G"
-      ENABLE_AUTOPAUSE: "TRUE"
-      MAX_TICK_TIME: "-1"
     volumes:
       - /opt/docker/volumes/papermc:/data
     ports:
