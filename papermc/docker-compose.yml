@@ -9,6 +9,7 @@ services:
       VERSION: "1.19"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
+      ENFORCE_WHITELIST: "TRUE"
       DIFFICULTY: "normal"
       ALLOW_NETHER: "TRUE"
       SERVER_NAME: "LettuceCraft"
@@ -20,7 +21,12 @@ services:
       MAX_TICK_TIME: "-1"
       AUTOPAUSE_TIMEOUT_INIT: "600"
       AUTOPAUSE_TIMEOUT_EST: "1200"
+      USE_AIKAR_FLAGS: "TRUE"
+      TZ: "America/Chicago"
+      INIT_MEMORY: "1G"
+      MAX_MEMORY: "4G"
       JVM_DD_OPTS: "disable.watchdog:true"
+      VANILLATWEAKS_SHARECODE: "vr27ux,ZNZh6w"
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
     ports:
