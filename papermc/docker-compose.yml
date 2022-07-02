@@ -27,7 +27,13 @@ services:
       MAX_MEMORY: "4G"
       JVM_DD_OPTS: "disable.watchdog:true"
       VANILLATWEAKS_SHARECODE: "vr27ux,ZNZh6w"
+
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
     ports:
       - 25565:25565
+
+networks:
+  default:
+    external:
+      name: nginx
