@@ -12,8 +12,16 @@ services:
       DIFFICULTY: "normal"
       ALLOW_NETHER: "TRUE"
       SERVER_NAME: "LettuceCraft"
+      MOTD: "Lettuce and friends"
       MEMORY: "2G"
+      ONLINE_MODE: "true"
+      ENABLE_AUTOPAUSE: "TRUE"
+      OVERRIDE_SERVER_PROPERTIES: "TRUE"
+      MAX_TICK_TIME: "-1"
+      AUTOPAUSE_TIMEOUT_INIT: "600"
+      AUTOPAUSE_TIMEOUT_EST: "1200"
+      JVM_DD_OPTS: "disable.watchdog:true"
     volumes:
-      - /opt/docker/volumes/papermc:/data
+      - /opt/docker/volumes/minecraft/papermc:/data
     ports:
       - 25565:25565
