@@ -9,9 +9,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
-      - /mnt/truenas/Media/Shows:/tv #optional
-      - /home/lettucebowler/downloads:/torrents #optional
-      - /mnt/truenas/Share/Downloads:/downloads
+      - /mnt/truenas/Media/Shows:/tv
+      - /mnt/truenas/Share/Downloads:/torrents
     restart: unless-stopped
 
 networks:
