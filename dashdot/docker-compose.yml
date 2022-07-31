@@ -12,10 +12,14 @@ services:
     privileged: true
     container_name: dashdot
     volumes:
-      - /etc/os-release:/etc/os-release:ro
-      - /proc/1/ns/net:/mnt/host_ns_net:ro
-      - /media:/mnt/host_media:ro
-      - /mnt:/mnt/host_mnt:ro
+    - /etc/os-release:/etc/os-release:ro
+    - /proc/1/ns/net:/mnt/host_ns_net:ro
+    - /media:/mnt/host_media:ro
+    - /mnt:/mnt/host_mnt:ro
+    environment:
+      DASHDOT_ENABLE_CPU_TEMPS: "TRUE"
+      DASHDOT_ENABLE_STORAGE_SPLIT_VIEW: "TRUE"
+      DASHDOT_ACCEPT_OOKLA_EULA: "TRUE"
 
 networks:
   default:
