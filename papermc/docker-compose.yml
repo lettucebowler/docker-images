@@ -1,12 +1,13 @@
 version: '3.5'
 
 services:
-  vanilla:
+  mc-vanilla:
+    container_name: mc-vanilla
     image: itzg/minecraft-server
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.19"
+      VERSION: "1.19.2"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
       ENFORCE_WHITELIST: "TRUE"
@@ -30,11 +31,12 @@ services:
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
 
-  router:
+  mc-router:
     image: itzg/mc-router
+    container_name: mc-router
     ports:
     - 25565:25565
-    command: --mapping=mc.lettucebowler.net=vanilla:25565,vanilla.mc.lettucebowler.net=vanilla:25565
+    command: --mapping=mc.lettucebowler.net=mc-vanilla:25565,vanilla.mc.lettucebowler.net=mc-vanilla:25565
 
 networks:
   default:
