@@ -27,7 +27,6 @@ services:
       INIT_MEMORY: "1G"
       MAX_MEMORY: "4G"
       JVM_DD_OPTS: "disable.watchdog:true"
-      VANILLATWEAKS_SHARECODE: "vr27ux,ZNZh6w"
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
 
