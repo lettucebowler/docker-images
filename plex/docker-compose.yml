@@ -1,8 +1,0 @@
-version: "2.1"
-services:
-  plex-proxy:
-    image: erisamoe/cloudflared
-    container_name: plex-proxy
-    volumes:
-      - /opt/docker/volumes/cloudflared:/etc/cloudflared
-    command: --hostname plex.lettucebowler.net --url http://192.168.192.65:32400
