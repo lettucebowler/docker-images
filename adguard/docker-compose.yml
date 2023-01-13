@@ -1,0 +1,18 @@
+version: "3"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 853:853/tcp
+    volumes:
+      - /opt/docker/volumes/adguardhome/work:/opt/adguardhome/work
+      - /opt/docker/volumes/adguardhome/conf:/opt/adguardhome/conf
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: nginx
