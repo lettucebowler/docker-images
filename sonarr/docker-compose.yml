@@ -10,6 +10,7 @@ services:
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
       - /mnt/truenas/Media/Shows:/tv
+      - /mnt/truenas/Media:/media
       - /mnt/truenas/Share/Downloads:/torrents
     restart: unless-stopped
 
