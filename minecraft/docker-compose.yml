@@ -7,7 +7,7 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.19.2"
+      VERSION: "1.19.3"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
       ENFORCE_WHITELIST: "TRUE"
