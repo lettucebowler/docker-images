@@ -10,7 +10,8 @@ services:
     volumes:
       - /opt/docker/volumes/radarr/config:/config
       - /mnt/truenas/Media/Movies:/movies
-      - /mnt/truenas/Share/Downloads:/torrents
+      - /home/lettucebowler/downloads:/torrents
+      - /home/lettucebowler/downloads:/downloads
     restart: unless-stopped
 
 networks:
