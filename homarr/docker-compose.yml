@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /opt/docker/volumes/homarr/configs:/app/data/configs
+      - /opt/docker/volumes/homarr/icons:/app/public/icons
+
+networks:
+  default:
+    external:
+      name: nginx
