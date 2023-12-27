@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  lidarr:
+    image: ghcr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/lidarr/config:/config
+      - /mnt/truenas/Media/Music:/music
+      - /mnt/truenas/Media:/media
+      - /home/lettucebowler/downloads:/torrents
+      - /home/lettucebowler/downloads:/downloads
+    restart: unless-stopped
+    ports:
+      - 8686:8686
+
+networks:
+  default:
+    external:
+      name: nginx
