@@ -14,9 +14,45 @@ services:
       - FIREWALL_VPN_INPUT_PORTS=${WIREGUARD_FORWARDED_PORT}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
-    ports:
-      - 8112:8112
-      - 58846:58846
+
+  ts-deluge:
+    image: tailscale/tailscale:latest
+    container_name: ts-deluge
+    hostname: ts-deluge
+    environment:
+      - TS_AUTHKEY=tskey-client-kYUazW5CNTRL-xQhrMVfzvuiMggKJgM4CuiZKPMgHUgzw
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=deluge
+    volumes:
+      - ts-deluge-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  deluge-caddy:
+    container_name: deluge-caddy
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-deluge
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+  
+  deluge-nginx:
+    container_name: deluge-nginx
+    image: nginx
+    network_mode: service:ts-deluge
+    depends_on:
+      - ts-deluge
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -39,3 +75,11 @@ networks:
   default:
     external:
       name: nginx
+
+volumes:
+  ts-deluge-data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
