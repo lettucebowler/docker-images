@@ -9,13 +9,49 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/prowlarr/config:/config
-    ports:
-      - 9696:9696
+    restart: unless-stopped
+
+  ts-prowlarr:
+    image: tailscale/tailscale:latest
+    container_name: ts-prowlarr
+    hostname: ts-prowlarr
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=prowlarr
+    volumes:
+      - ts-prowlarr-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  prowlarr-caddy:
+    container_name: prowlarr-caddy
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-prowlarr
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
     restart: unless-stopped
 
 networks:
   default:
     external:
       name: nginx
+
+volumes:
+  ts-prowlarr-data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
 
 
