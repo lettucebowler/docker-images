@@ -20,7 +20,7 @@ services:
     container_name: ts-deluge
     hostname: ts-deluge
     environment:
-      - TS_AUTHKEY=tskey-client-kYUazW5CNTRL-xQhrMVfzvuiMggKJgM4CuiZKPMgHUgzw
+      - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=deluge
