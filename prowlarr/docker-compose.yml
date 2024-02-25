@@ -3,7 +3,6 @@ services:
   ts-prowlarr:
     image: tailscale/tailscale:latest
     container_name: ts-prowlarr
-    network_mode: service:ts-prowlarr
     hostname: ts-prowlarr
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
@@ -20,6 +19,7 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
+    network_mode: service:ts-prowlarr
     environment:
       - PUID=1000
       - PGID=1000
