@@ -14,10 +14,46 @@ services:
       - /home/lettucebowler/downloads:/torrents
       - /home/lettucebowler/downloads:/downloads
     restart: unless-stopped
-    ports:
-      - 8989:8989
+
+  ts-sonarr:
+    image: tailscale/tailscale:latest
+    container_name: ts-sonarr
+    hostname: ts-sonarr
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=sonarr
+    volumes:
+      - ts-sonarr-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  sonarr-caddy:
+    container_name: sonarr-caddy
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-sonarr
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
 
 networks:
   default:
     external:
       name: nginx
+
+volumes:
+  ts-sonarr-data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
