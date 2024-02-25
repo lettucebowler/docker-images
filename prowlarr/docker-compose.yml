@@ -41,11 +41,6 @@ services:
       - net_admin
     restart: unless-stopped
 
-networks:
-  default:
-    external:
-      name: nginx
-
 volumes:
   ts-prowlarr-data:
     driver: local
