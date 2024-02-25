@@ -3,5 +3,5 @@
 }
 
 prowlarr.lettucebowler.net {
-    reverse_proxy radarr:9696
+    reverse_proxy :9696
 }

@@ -1,19 +1,9 @@
 version: "2.1"
 services:
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
-    container_name: prowlarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /opt/docker/volumes/prowlarr/config:/config
-    restart: unless-stopped
-
   ts-prowlarr:
     image: tailscale/tailscale:latest
     container_name: ts-prowlarr
+    network_mode: service:ts-prowlarr
     hostname: ts-prowlarr
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
@@ -25,6 +15,17 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /opt/docker/volumes/prowlarr/config:/config
     restart: unless-stopped
 
   prowlarr-caddy:
