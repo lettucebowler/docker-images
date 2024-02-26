@@ -1,3 +1,0 @@
-@@|ad.doubleclick.net^$important
-@@|adservice.google.com^$important
-@@|googleadservices.com^$important
