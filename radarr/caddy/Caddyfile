@@ -3,5 +3,5 @@
 }
 
 radarr.lettucebowler.net {
-    reverse_proxy radarr:7878
+    reverse_proxy :7878
 }

@@ -3,6 +3,7 @@ services:
   sonarr:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
+    network_mode: service:ts-sonarr
     environment:
       - PUID=1000
       - PGID=1000
@@ -44,11 +45,6 @@ services:
     cap_add:
       - net_admin
     restart: unless-stopped
-
-networks:
-  default:
-    external:
-      name: nginx
 
 volumes:
   ts-sonarr-data:

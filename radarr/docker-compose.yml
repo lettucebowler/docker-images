@@ -3,6 +3,7 @@ services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
+    network_mode: service:ts-radarr
     environment:
       - PUID=1000
       - PGID=1000
@@ -43,11 +44,6 @@ services:
     cap_add:
       - net_admin
     restart: unless-stopped
-
-networks:
-  default:
-    external:
-      name: nginx
 
 volumes:
   ts-radarr-data:

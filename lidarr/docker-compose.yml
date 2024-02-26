@@ -7,6 +7,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
+    network_mode: service:ts-lidarr
+    depends_on:
+      - ts-lidarr
     volumes:
       - /opt/docker/volumes/lidarr/config:/config
       - /mnt/truenas/Media/Music:/music
@@ -14,10 +17,41 @@ services:
       - /home/lettucebowler/downloads:/torrents
       - /home/lettucebowler/downloads:/downloads
     restart: unless-stopped
-    ports:
-      - 8686:8686
 
-networks:
-  default:
-    external:
-      name: nginx
+  ts-lidarr:
+    image: tailscale/tailscale:latest
+    container_name: ts-lidarr
+    hostname: ts-lidarr
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=lidarr
+    volumes:
+      - ts-lidarr-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  lidarr-caddy:
+    container_name: lidarr-caddy
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-lidarr
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+volumes:
+  ts-lidarr-data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
