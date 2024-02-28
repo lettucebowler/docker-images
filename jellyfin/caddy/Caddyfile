@@ -1,0 +1,11 @@
+jelly.lettucebowler.net {
+    reverse_proxy jellyfin:8096
+    tls {
+	    dns cloudflare {env.CF_API_TOKEN}
+        resolvers 1.1.1.1
+    }
+}
+
+:8096 {
+    reverse_proxy jellyfin:8096
+}

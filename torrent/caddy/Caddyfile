@@ -5,3 +5,7 @@
 deluge.lettucebowler.net {
     reverse_proxy gluetun:8112
 }
+
+:8112 {
+    reverse_proxy gluetun:8112
+}
