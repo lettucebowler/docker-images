@@ -9,8 +9,8 @@ services:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
-      - WIREGUARD_CITIES=Chicago Illinois,Toronto Ontario
-      - WIREGUARD_COUNTRIES=United States,Canada
+      - SERVER_CITIES=Chicago Illinois,Toronto Ontario
+      - SERVER_COUNTRIES=United States,Canada
       - FIREWALL_VPN_INPUT_PORTS=${WIREGUARD_FORWARDED_PORT}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
