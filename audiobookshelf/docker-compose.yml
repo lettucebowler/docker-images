@@ -7,6 +7,7 @@ services:
     # the port, only change the external port, not the internal port
     # ports:
     #   - 13378:80
+    container_name: audiobookshelf
     volumes:
       # These volumes are needed to keep your library persistent
       # and allow media to be accessed by the ABS server.
