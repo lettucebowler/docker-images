@@ -32,7 +32,6 @@ services:
   audiobookshelf-nginx:
     container_name: audiobookshelf-nginx
     image: nginx
-    network_mode: service:audiobookshelf
     depends_on:
       - audiobookshelf
     volumes:

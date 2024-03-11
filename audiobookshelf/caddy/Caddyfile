@@ -1,5 +1,5 @@
 audio.lettucebowler.net {
-    reverse_proxy audiobookshelf:13378
+    reverse_proxy audiobookshelf-nginx:13378
     tls {
 	    dns cloudflare {env.CF_API_TOKEN}
         resolvers 1.1.1.1
