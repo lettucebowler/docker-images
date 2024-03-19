@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   gluetun:
-    image: qmcgaw/gluetun:3.37
+    image: qmcgaw/gluetun:v3.37
     container_name: gluetun
     cap_add:
       - NET_ADMIN
