@@ -71,11 +71,6 @@ services:
       - /mnt/truenas/Share/Downloads:/torrents
     restart: unless-stopped
 
-networks:
-  default:
-    external:
-      name: nginx
-
 volumes:
   ts-deluge-data:
     driver: local
