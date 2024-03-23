@@ -9,7 +9,7 @@ services:
       TYPE: "PAPER"
       VERSION: "1.20.4"
       MODRINTH_PROJECTS: "vane"
-      MODRINTH_DOWNLOAD_DEPENDENTIES="optional"
+      MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
       ENFORCE_WHITELIST: "TRUE"
