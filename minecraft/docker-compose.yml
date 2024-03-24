@@ -7,8 +7,8 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.20.4"
-      MODRINTH_PROJECTS: "vane"
+      VERSION: "1.20.1"
+      MODRINTH_PROJECTS: "vane,essentialsx,veinminer"
       MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
@@ -31,13 +31,15 @@ services:
       JVM_DD_OPTS: "disable.watchdog:true"
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
-
-  mc-router:
-    image: itzg/mc-router
-    container_name: mc-router
     ports:
-    - 25565:25565
-    command: --mapping=mc.lettucebowler.net=mc-vanilla:25565,vanilla.mc.lettucebowler.net=mc-vanilla:25565
+      - 25565:25565
+
+  # mc-router:
+  #   image: itzg/mc-router
+  #   container_name: mc-router
+  #   ports:
+  #   - 25565:25565
+  #   command: --mapping=mc.lettucebowler.net=mc-vanilla:25565,vanilla.mc.lettucebowler.net=mc-vanilla:25565
 
 networks:
   default:
