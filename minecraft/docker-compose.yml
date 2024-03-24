@@ -8,7 +8,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       VERSION: "1.20.1"
-      MODRINTH_PROJECTS: "vane,essentialsx,veinminer"
+      MODRINTH_PROJECTS: "vane,essentialsx"
       MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
       OPS: "lettucebowler"
       WHITELIST: "lettucebowler"
