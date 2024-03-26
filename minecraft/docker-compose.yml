@@ -8,7 +8,6 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       VERSION: "1.20.1"
-      SPIGET_RESOURCES: "1997"
       MODRINTH_PROJECTS: "vane,essentialsx"
       MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
       OPS: "lettucebowler"
@@ -18,7 +17,6 @@ services:
       ALLOW_NETHER: "TRUE"
       SERVER_NAME: "LettuceCraft"
       MOTD: "Lettuce and friends"
-      MEMORY: "2G"
       ONLINE_MODE: "true"
       ENABLE_AUTOPAUSE: "TRUE"
       OVERRIDE_SERVER_PROPERTIES: "TRUE"
@@ -29,11 +27,12 @@ services:
       TZ: "America/Chicago"
       INIT_MEMORY: "1G"
       MAX_MEMORY: "4G"
+      ENABLE_ROLLING_LOGS: "true"
+      VIEW_DISTANCE: 12
       JVM_DD_OPTS: "disable.watchdog:true"
+    network_mode: service:ts-minecraft
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
-    ports:
-      - 25565:25565
 
   # mc-router:
   #   image: itzg/mc-router
@@ -42,7 +41,23 @@ services:
   #   - 25565:25565
   #   command: --mapping=mc.lettucebowler.net=mc-vanilla:25565,vanilla.mc.lettucebowler.net=mc-vanilla:25565
 
-networks:
-  default:
-    external:
-      name: nginx
+  ts-minecraft:
+    image: tailscale/tailscale:latest
+    container_name: ts-minecraft
+    hostname: ts-minecraft
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=minecraft
+    volumes:
+      - ts-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+volumes:
+  ts-data:
+    driver: local
+  
