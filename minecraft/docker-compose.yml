@@ -1,45 +1,62 @@
 version: '3.5'
 
 services:
-  mc-vanilla:
-    container_name: mc-vanilla
+  minecraft:
+    build: .
+    container_name: minecraft
     image: itzg/minecraft-server
     environment:
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      VERSION: "1.20.1"
-      MODRINTH_PROJECTS: "vane,essentialsx,chunky,OhduvhIc"
-      MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
-      OPS: "lettucebowler"
-      WHITELIST: "lettucebowler"
-      ENFORCE_WHITELIST: "TRUE"
-      DIFFICULTY: "normal"
-      ALLOW_NETHER: "TRUE"
-      SERVER_NAME: "LettuceCraft"
-      MOTD: "Lettuce and friends"
-      ONLINE_MODE: "true"
-      ENABLE_AUTOPAUSE: "TRUE"
-      OVERRIDE_SERVER_PROPERTIES: "TRUE"
-      MAX_TICK_TIME: "-1"
-      AUTOPAUSE_TIMEOUT_INIT: "600"
-      AUTOPAUSE_TIMEOUT_EST: "1200"
-      USE_AIKAR_FLAGS: "TRUE"
-      TZ: "America/Chicago"
-      INIT_MEMORY: "1G"
-      MAX_MEMORY: "4G"
-      ENABLE_ROLLING_LOGS: "true"
-      VIEW_DISTANCE: 12
-      JVM_DD_OPTS: "disable.watchdog:true"
-    network_mode: service:ts-minecraft
+      - EULA=TRUE
+      - TYPE=PAPER
+      - VERSION=1.20.1
+      - MODRINTH_PROJECTS=vane:WDidrIqU,essentialsx,veinminer:11brGK6s,chunky,thizzyz-tree-feller,bluemap
+      - MODRINTH_DOWNLOAD_DEPENDENCIES=required
+      - OPS=lettucebowler
+      - WHITELIST=lettucebowler
+      - ENFORCE_WHITELIST=TRUE
+      - DIFFICULTY=normal
+      - ALLOW_NETHER=TRUE
+      - SERVER_NAME=LettuceCraft
+      - MOTD=Lettuce and friends
+      - ONLINE_MODE=TRUE
+      - OVERRIDE_SERVER_PROPERTIES=TRUE
+      - MAX_TICK_TIME=-1
+      - USE_AIKAR_FLAGS=TRUE
+      - TZ=America/Chicago
+      - INIT_MEMORY=2G
+      - MAX_MEMORY=8G
+      - ENABLE_ROLLING_LOGS=TRUE
+      - VIEW_DISTANCE=12
+    ports:
+      - 25565:25565
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
+    restart: unless-stopped
 
-  # mc-router:
-  #   image: itzg/mc-router
-  #   container_name: mc-router
-  #   ports:
-  #   - 25565:25565
-  #   command: --mapping=mc.lettucebowler.net=mc-vanilla:25565,vanilla.mc.lettucebowler.net=mc-vanilla:25565
+  caddy-minecraft:
+    container_name: caddy-minecraft
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-minecraft
+    depends_on:
+      - ts-minecraft
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  nginx-minecraft:
+    container_name: nginx-minecraft
+    image: nginx
+    network_mode: service:ts-minecraft
+    depends_on:
+      - ts-minecraft
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
   ts-minecraft:
     image: tailscale/tailscale:latest
@@ -60,4 +77,7 @@ services:
 volumes:
   ts-data:
     driver: local
-  
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
