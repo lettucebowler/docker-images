@@ -11,7 +11,7 @@ services:
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
       - smb_shows:/tv
-      - smb_downloads:/downloads:/torrents
+      - smb_downloads:/torrents
     restart: unless-stopped
 
   ts-sonarr:
