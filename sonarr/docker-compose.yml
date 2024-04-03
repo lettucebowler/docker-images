@@ -61,5 +61,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      device: //192.168.10.99/Share/Media/Shows
+      device: //192.168.10.99/Media/Shows
       o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
