@@ -44,7 +44,7 @@ services:
     cap_add:
       - net_admin
     restart: unless-stopped
-  
+
   deluge-nginx:
     container_name: deluge-nginx
     image: nginx
@@ -67,8 +67,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
-      - /home/lettucebowler/downloads:/downloads
-      - /mnt/truenas/Share/Downloads:/torrents
+      - smb_downloads:/downloads
     restart: unless-stopped
 
 volumes:
@@ -78,3 +77,9 @@ volumes:
     driver: local
   caddy_config:
     driver: local
+  smb_downloads:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Share/Downloads
+      o: username=lettuce,password=rusondia13,vers=3.0,uid=1000
