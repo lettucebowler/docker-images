@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   caddy-radarr:
-    container_name: radarr-caddy
+    container_name: caddy-radarr
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
