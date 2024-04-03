@@ -10,9 +10,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/radarr/config:/config
-      - /mnt/truenas/Media/Movies:/movies
-      - /home/lettucebowler/downloads:/torrents
-      - /home/lettucebowler/downloads:/downloads
+      - smb_movies:/movies
+      - smb_downloads:/downloads
     restart: unless-stopped
 
   ts-radarr:
@@ -31,7 +30,7 @@ services:
       - net_admin
     restart: unless-stopped
 
-  radarr-caddy:
+  caddy-radarr:
     container_name: radarr-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
@@ -52,3 +51,15 @@ volumes:
     driver: local
   caddy_config:
     driver: local
+  smb_downloads:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Share/Downloads
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+  smb_movies:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Media/Movies
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
