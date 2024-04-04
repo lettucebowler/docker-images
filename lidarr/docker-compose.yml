@@ -12,10 +12,8 @@ services:
       - ts-lidarr
     volumes:
       - /opt/docker/volumes/lidarr/config:/config
-      - /mnt/truenas/Media/Music:/music
-      - /mnt/truenas/Media:/media
-      - /home/lettucebowler/downloads:/torrents
-      - /home/lettucebowler/downloads:/downloads
+      - smb_music:/music
+      - smb_downloads:/downloads
     restart: unless-stopped
 
   ts-lidarr:
@@ -55,3 +53,15 @@ volumes:
     driver: local
   caddy_config:
     driver: local
+  smb_downloads:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Share/Downloads
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+  smb_music:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Media/Movies
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
