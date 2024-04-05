@@ -9,11 +9,13 @@ services:
       - VERSION=docker
     volumes:
       - /opt/docker/volumes/plex/config:/config
-      - /share/Media:/media
+      - smb_media:/media
       - /tmp:/transcode
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
+    ports:
+      - 32400:32400
 
   ts-plex:
     image: tailscale/tailscale:latest
@@ -52,7 +54,7 @@ volumes:
     driver: local
   caddy_config:
     driver: local
-  smb_shows:
+  smb_media:
     driver: local
     driver_opts:
       type: cifs
