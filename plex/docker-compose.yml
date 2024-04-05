@@ -1,0 +1,60 @@
+version: "3.8"
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    volumes:
+      - /opt/docker/volumes/plex/config:/config
+      - /share/Media:/media
+      - /tmp:/transcode
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+  ts-plex:
+    image: tailscale/tailscale:latest
+    container_name: ts-plex
+    hostname: ts-plex
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=sonarr
+    volumes:
+      - ts-plex-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  caddy-plex:
+    container_name: caddy-plex
+    image: iarekylew00t/caddy-cloudflare
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:ts-plex
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+volumes:
+  ts-data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+  smb_shows:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Media
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000

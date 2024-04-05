@@ -1,0 +1,7 @@
+{
+	acme_dns cloudflare {env.CF_API_TOKEN}
+}
+
+plex.lettucebowler.net {
+    reverse_proxy plex:32400
+}
