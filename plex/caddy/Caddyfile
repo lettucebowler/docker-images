@@ -5,3 +5,7 @@
 plex.lettucebowler.net {
     reverse_proxy plex:32400
 }
+
+:32400 {
+    reverse_proxy plex:32400
+}
