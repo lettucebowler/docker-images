@@ -25,7 +25,7 @@ services:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
-      - TS_HOSTNAME=sonarr
+      - TS_HOSTNAME=plex
     volumes:
       - ts-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
