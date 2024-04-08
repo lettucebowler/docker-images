@@ -9,7 +9,7 @@ services:
       - VERSION=docker
     volumes:
       - /opt/docker/volumes/plex/config:/config
-      - /mnt/truenas/media:/media
+      - smb_media:/media
       - /tmp:/transcode
     devices:
       - /dev/dri:/dev/dri
@@ -54,9 +54,9 @@ volumes:
     driver: local
   caddy_config:
     driver: local
-  # smb_media:
-  #   driver: local
-  #   driver_opts:
-  #     type: cifs
-  #     device: //192.168.10.99/Media
-  #     o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+  smb_media:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Media
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
