@@ -1,0 +1,24 @@
+# port for Autoscan webhooks to listen on
+port: 3030
+
+triggers:
+
+  # lidarr:
+  #   - name: lidarr   # /triggers/lidarr
+  #     priority: 6
+
+  # radarr:
+  #   - name: radarr   # /triggers/radarr
+  #     priority: 2
+  #   - name: radarr4k # /triggers/radarr4k
+  #     priority: 3
+  sonarr:
+    - name: sonarr # /triggers/sonarr
+      priority: 2
+
+targets:
+  plex:
+    - url: http://plex:32400 # URL of your Plex server
+      token: YOURPLEXTOKEN # Plex API Token
+
+minimum-age: 5s

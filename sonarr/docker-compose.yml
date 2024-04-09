@@ -10,7 +10,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/sonarr/config:/config
-      - smb_shows:/tv
+      - smb_shows:/media/Shows
       - smb_downloads:/downloads
     restart: unless-stopped
 
