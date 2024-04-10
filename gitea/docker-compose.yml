@@ -29,7 +29,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   gitea-caddy:
     container_name: gitea-caddy
@@ -43,7 +43,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-gitea-data:

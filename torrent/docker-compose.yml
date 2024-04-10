@@ -3,7 +3,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun:v3.37
     container_name: gluetun
-    restart: unless-stopped
+    restart: always
     cap_add:
       - NET_ADMIN
     environment:
@@ -30,7 +30,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   deluge-caddy:
     container_name: deluge-caddy
@@ -44,7 +44,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   deluge-nginx:
     container_name: deluge-nginx
@@ -54,7 +54,7 @@ services:
       - ts-deluge
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: unless-stopped
+    restart: always
 
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -70,7 +70,7 @@ services:
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
       - smb_downloads:/downloads
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-deluge-data:
