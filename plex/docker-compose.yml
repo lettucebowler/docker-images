@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 services:
   plex:
     image: ghcr.io/linuxserver/plex
@@ -49,15 +49,13 @@ services:
 
   autoscan:
     container_name: autoscan
-    image: ghcr.io/hotio/autoscan
+    image: cloudb0x/autoscan
     restart: unless-stopped
     network_mode: service:ts-plex
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PLEX_TOKEN=${PLEX_TOKEN}
     volumes:
-      - ./config:/config
-      - ./autoscan/config.yml:/config/config.yml:ro
+      - /opt/docker/volumes/autoscan/config:/config
       - smb_media:/media #media dir
 
 volumes:
