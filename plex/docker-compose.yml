@@ -58,7 +58,7 @@ services:
     volumes:
       - ./config:/config
       - ./autoscan/config.yml:/config/config.yml:ro
-      - 'smb_media:/media:shared' #media dir
+      - smb_media:/media #media dir
 
 volumes:
   ts-data:
