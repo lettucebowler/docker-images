@@ -12,7 +12,7 @@ services:
       - /opt/docker/volumes/sonarr/config:/config
       - smb_shows:/media/Shows
       - smb_downloads:/downloads
-    restart: unless-stopped
+    restart: always
 
   ts-sonarr:
     image: tailscale/tailscale:latest
@@ -28,7 +28,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   sonarr-caddy:
     container_name: sonarr-caddy
@@ -42,7 +42,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-sonarr-data:

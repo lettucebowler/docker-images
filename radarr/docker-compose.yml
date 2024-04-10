@@ -12,7 +12,7 @@ services:
       - /opt/docker/volumes/radarr/config:/config
       - smb_movies:/media/Movies
       - smb_downloads:/downloads
-    restart: unless-stopped
+    restart: always
 
   ts-radarr:
     image: tailscale/tailscale:latest
@@ -28,7 +28,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   caddy-radarr:
     container_name: caddy-radarr
@@ -42,7 +42,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-radarr-data:

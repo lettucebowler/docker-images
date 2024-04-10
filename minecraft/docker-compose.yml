@@ -31,7 +31,7 @@ services:
       - 25565:25565
     volumes:
       - /opt/docker/volumes/minecraft/papermc:/data
-    restart: unless-stopped
+    restart: always
 
   caddy-minecraft:
     container_name: caddy-minecraft
@@ -47,7 +47,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   nginx-minecraft:
     container_name: nginx-minecraft
@@ -72,7 +72,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-data:

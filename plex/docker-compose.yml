@@ -13,7 +13,7 @@ services:
       - /tmp:/transcode
     devices:
       - /dev/dri:/dev/dri
-    restart: unless-stopped
+    restart: always
     ports:
       - 32400:32400
 
@@ -33,7 +33,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   caddy-plex:
     container_name: caddy-plex
@@ -47,12 +47,12 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   autoscan:
     container_name: autoscan
     image: cloudb0x/autoscan
-    restart: unless-stopped
+    restart: always
     network_mode: service:ts-plex
     depends_on:
       - plex

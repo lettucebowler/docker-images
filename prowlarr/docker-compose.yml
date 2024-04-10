@@ -10,7 +10,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/prowlarr/config:/config
-    restart: unless-stopped
+    restart: always
 
   flaresolverr:
     # DockerHub mirror flaresolverr/flaresolverr:latest
@@ -23,7 +23,7 @@ services:
       - TZ=Europe/London
     ports:
       - "${PORT:-8191}:8191"
-    restart: unless-stopped
+    restart: always
 
 
   ts-prowlarr:
@@ -40,7 +40,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   prowlarr-caddy:
     container_name: prowlarr-caddy
@@ -54,7 +54,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-prowlarr-data:

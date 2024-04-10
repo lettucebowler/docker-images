@@ -14,7 +14,7 @@ services:
       - /opt/docker/volumes/lidarr/config:/config
       - smb_music:/music
       - smb_downloads:/downloads
-    restart: unless-stopped
+    restart: always
 
   ts-lidarr:
     image: tailscale/tailscale:latest
@@ -30,7 +30,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   lidarr-caddy:
     container_name: lidarr-caddy
@@ -44,7 +44,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-lidarr-data:

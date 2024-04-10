@@ -11,4 +11,4 @@ services:
       - /opt/docker/volumes/adguard-sync/config:/config
     ports:
       - 8080:8080
-    restart: unless-stopped
+    restart: always

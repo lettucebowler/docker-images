@@ -13,7 +13,7 @@ services:
       - /mnt/truenas/Media/Movies:/data/movies
     ports:
       - 8096:8096
-    restart: unless-stopped
+    restart: always
     devices:
       - /dev/dri:/dev/dri
   ts-jellyfin:
@@ -30,7 +30,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
   jellyfin-caddy:
     container_name: jellyfin-caddy
@@ -44,7 +44,7 @@ services:
       - caddy_config:/config
     cap_add:
       - net_admin
-    restart: unless-stopped
+    restart: always
 
 volumes:
   ts-jellyfin-data:
