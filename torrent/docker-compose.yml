@@ -3,7 +3,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun:v3.37
     container_name: gluetun
-    restart: unless_stopped
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     environment:
