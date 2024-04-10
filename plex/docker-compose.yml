@@ -47,21 +47,20 @@ services:
       - net_admin
     restart: unless-stopped
 
-  # autoscan:
-  #   container_name: autoscan
-  #   image: ghcr.io/hotio/autoscan
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3030:3030"
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #   volumes:
-  #     - ./config:/config
-  #     - ./autoscan/config.yml:/config/config.yml:ro
-  #     - 'smb_media:/media:shared' #media dir
-  #   depends_on:
-  #     - autoscan-adapter
+  autoscan:
+    container_name: autoscan
+    image: ghcr.io/hotio/autoscan
+    restart: unless-stopped
+    network_mode: service:ts-plex
+    ports:
+      - "3030:3030"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./config:/config
+      - ./autoscan/config.yml:/config/config.yml:ro
+      - 'smb_media:/media:shared' #media dir
 
 volumes:
   ts-data:
