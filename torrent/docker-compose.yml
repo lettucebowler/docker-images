@@ -3,6 +3,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun:v3.37
     container_name: gluetun
+    restart: unless_stopped
     cap_add:
       - NET_ADMIN
     environment:
@@ -53,6 +54,7 @@ services:
       - ts-deluge
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
 
   deluge:
     image: ghcr.io/linuxserver/deluge
