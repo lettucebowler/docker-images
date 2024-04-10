@@ -10,7 +10,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/radarr/config:/config
-      - smb_movies:/movies
+      - smb_movies:/media/Movies
       - smb_downloads:/downloads
     restart: unless-stopped
 
