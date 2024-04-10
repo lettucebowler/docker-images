@@ -25,7 +25,6 @@ services:
       - "${PORT:-8191}:8191"
     restart: always
 
-
   ts-prowlarr:
     image: tailscale/tailscale:latest
     container_name: ts-prowlarr
@@ -52,6 +51,8 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    depends_on:
+      - ts-prowlarr
     cap_add:
       - net_admin
     restart: always
@@ -63,5 +64,3 @@ volumes:
     driver: local
   caddy_config:
     driver: local
-
-
