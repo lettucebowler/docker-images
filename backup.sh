@@ -9,15 +9,15 @@ for f in /opt/docker/stacks/*;
     if test -f /opt/docker/backup/backups/$ff.tar.lz4; then
       rm /opt/docker/backup/backups/$ff.tar.lz4
     fi
-    tar -cvf - -C /opt/docker/volumes/$ff . | lz4 - /opt/docker/backup/backups/$ff.tar.lz4
+    tar -cvf - -C /opt/docker/volumes/$ff . | lz4 - /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
     docker-compose -f $f/docker-compose.yml pull
     docker-compose -f $f/docker-compose.yml up -d --remove-orphans
 done
 for f in /opt/docker/stacks/*;
   do
     ff=${f##*/}
-    echo Moving /opt/docker/backup/backups/$ff.tar.lz4 to Backups share
-    cp /opt/docker/backup/backups/$ff.tar.lz4 /mnt/truenas/backups/$ff.tar.lz4
-    rm /opt/docker/backup/backups/$ff.tar.lz4
+    echo Moving /opt/docker/backup/backups/$(hostname).$ff.tar.lz4 to Backups share
+    cp /opt/docker/backup/backups/$(hostname).$ff.tar.lz4 /mnt/truenas/backups/
+    rm /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
 done
 docker system prune -af
