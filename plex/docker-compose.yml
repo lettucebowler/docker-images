@@ -57,8 +57,6 @@ services:
     depends_on:
       - plex
       - ts-plex
-    environment:
-      - PLEX_TOKEN=${PLEX_TOKEN}
     volumes:
       - /opt/docker/volumes/plex/autoscan/config:/config
       - smb_media:/media #media dir
