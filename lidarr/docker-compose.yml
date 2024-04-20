@@ -12,7 +12,7 @@ services:
       - ts-lidarr
     volumes:
       - /opt/docker/volumes/lidarr/config:/config
-      - smb_music:/music
+      - smb_music:/media/music
       - smb_downloads:/downloads
     restart: always
 
@@ -63,5 +63,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      device: //192.168.10.99/Media/Movies
+      device: //192.168.10.99/Media/Music
       o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
