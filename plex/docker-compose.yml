@@ -6,6 +6,7 @@ services:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+      - ADVERTISE_IP='https://192.168.10.133,https://plex.lettucebowler.net'
     volumes:
       - /opt/docker/volumes/plex/plex/config:/config
       - smb_media:/media
