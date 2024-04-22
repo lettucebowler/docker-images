@@ -13,15 +13,12 @@ services:
     devices:
       - /dev/dri:/dev/dri
     restart: always
-    ports:
-      - 32400:32400
+    network_mode: host
 
   ts-plex:
     image: tailscale/tailscale:latest
     container_name: ts-plex
     hostname: ts-plex
-    depends_on:
-      - plex
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
