@@ -13,7 +13,8 @@ services:
     devices:
       - /dev/dri:/dev/dri
     restart: always
-    network_mode: host
+    ports:
+      - 32400:32400
 
   ts-plex:
     image: tailscale/tailscale:latest
