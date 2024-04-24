@@ -1,7 +1,7 @@
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ee
+    image: portainer/portainer-ee:2.20.1
     restart: always
     depends_on:
       - ts-portainer
