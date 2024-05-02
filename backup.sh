@@ -16,8 +16,8 @@ for f in /opt/docker/stacks/*;
 done
 for f in /opt/docker/stacks/*;
   do
+    ff=${f##*/}
     if test -d /opt/docker/volumes/$ff; then
-      ff=${f##*/}
       echo Moving /opt/docker/backup/backups/$(hostname).$ff.tar.lz4 to Backups share
       if test -f /mnt/truenas/backups/$(hostname).$ff.tar.lz4; then
         mv /mnt/truenas/backups/$(hostname).$ff.tar.lz4 /mnt/truenas/backups/old.$(hostname).$ff.tar.lz4
