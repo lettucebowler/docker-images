@@ -16,7 +16,7 @@ triggers:
 
 targets:
   plex:
-    - url: http://plex:32400 # URL of your Plex server
+    - url: http://plex.lettucebowler.net:32400 # URL of your Plex server
       token: PLEX_TOKEN # Plex API Token
 
 minimum-age: 5s
