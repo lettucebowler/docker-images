@@ -1,0 +1,47 @@
+http:
+  routers:
+    truenas:
+      tls: 
+        certresolver: cloudflare
+      entryPoints:
+        - websecure
+      service: "truenas"
+      rule: Host(`nas.lettucebowler.net`)
+    plex:
+      tls: 
+        certresolver: cloudflare
+      entryPoints:
+        - websecure
+      service: "plex"
+      rule: Host(`plex.lettucebowler.net`)
+    adguardhome:
+      tls: 
+        certresolver: cloudflare
+      entryPoints:
+        - websecure
+      service: "adguardhome"
+      rule: Host(`adguard2.lettucebowler.net`)
+    home-assistant:
+      tls: 
+        certresolver: cloudflare
+      entryPoints:
+        - websecure
+      service: "adguardhome"
+      rule: Host(`home.lettucebowler.net`)
+  services:
+    truenas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.99:8081"
+    plex:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.133:32400"
+    adguardhome:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.133:3000"
+    home-assistant:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.212:8123"

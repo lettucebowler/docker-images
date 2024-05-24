@@ -4,27 +4,58 @@ services:
     container_name: traefik
     command:
       - "--api.insecure=true"
+      # - "--log.level=DEBUG"
+      # Docker provider
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      # File provider
+      - "--providers.file.directory=/etc/traefik/rules"
+      - "--providers.file.watch=true"
+      # Entrypoints
       - "--entrypoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.myresolver.acme.email=lettucebowler@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      # DNS Challenge stuff for letsencrypt
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge=true"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53"
+      - "--certificatesresolvers.cloudflare.acme.email=lettucebowler@gmail.com"
+      - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
     environment:
-      - CF_DNS_API_KEY=${CF_DNS_API_KEY}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_KEY}
+      - LEGO_DISABLE_CNAME_SUPPORT=true
     volumes:
       - "/opt/docker/volumes/traefik/letsencrypt:/letsencrypt"
+      - "/opt/docker/volumes/traefik/rules:/etc/traefik/rules"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    network_mode: service:ts-traefik 
+
+  ts-traefik:
+    image: tailscale/tailscale:latest
+    container_name: ts-traefik
+    hostname: ts-traefik
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=${TS_HOSTNAME}
+    volumes:
+      - ts-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: always
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
+    networks:
+      - traefik
 
-  whoami:
-    # A container that exposes an API to show its IP address
-    image: traefik/whoami
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.lettucebowler.net`)"
+volumes:
+  ts-data:
+    driver: local
+
+networks:
+  traefik:
+    name: traefik
+    external: true
