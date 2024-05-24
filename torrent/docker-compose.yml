@@ -66,12 +66,16 @@ services:
       - PGID=1000
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
-      - DELUGE_USER=testuser
+      - DELUGE_USER=${DELUGE_USER}
+      - DELUGE_PASS=${DELUGE_PASS}
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
       - ./deluge/healthcheck.sh:/healthcheck.sh
       - smb_downloads:/downloads
     restart: always
+    healthcheck:
+      test: ["CMD", "bash", "/healthcheck.sh"]
+      interval: 5m
 
 volumes:
   ts-deluge-data:
