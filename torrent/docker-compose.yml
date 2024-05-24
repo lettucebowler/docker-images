@@ -66,8 +66,10 @@ services:
       - PGID=1000
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
+      - DELUGE_USER=testuser
     volumes:
       - /opt/docker/volumes/torrent/deluge/config:/config
+      - ./deluge/healthcheck.sh:/healthcheck.sh
       - smb_downloads:/downloads
     restart: always
 
