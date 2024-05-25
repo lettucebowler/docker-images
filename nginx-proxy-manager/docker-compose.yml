@@ -1,17 +1,38 @@
 services:
-  app:
+  proxy:
     image: "jc21/nginx-proxy-manager:latest"
     restart: always
-    container_name: nginx-proxy-manager
+    container_name: proxy
+    network_mode: service:ts-proxy
+    volumes:
+      - /opt/docker/volumes/nginx-proxy-manager/data:/data
+      - /opt/docker/volumes/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+  ts-proxy:
+    image: tailscale/tailscale:latest
+    container_name: ts-proxy
+    hostname: ts-proxy
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=${TS_HOSTNAME}
+    volumes:
+      - ts-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: always
     ports:
       - "80:80" # Public HTTP Port
       - "443:443" # Public HTTPS Port
       - "81:81" # Admin Web Port
-    volumes:
-      - /opt/docker/volumes/nginx-proxy-manager/data:/data
-      - /opt/docker/volumes/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
 
 networks:
   default:
     name: nginx
     external: true
+
+volumes:
+  ts-data:
+    driver: local
