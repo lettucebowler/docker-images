@@ -14,6 +14,9 @@ services:
       - FIREWALL_VPN_INPUT_PORTS=${WIREGUARD_FORWARDED_PORT}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
+    ports:
+      8112:8112
+      58846:58846
 
   ts-deluge:
     image: tailscale/tailscale:latest
