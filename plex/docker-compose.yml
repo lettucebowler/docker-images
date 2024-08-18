@@ -46,18 +46,6 @@ services:
       - net_admin
     restart: always
 
-  autoscan:
-    container_name: autoscan
-    image: cloudb0x/autoscan
-    restart: always
-    network_mode: service:ts-plex
-    depends_on:
-      - plex
-      - ts-plex
-    volumes:
-      - /opt/docker/volumes/plex/autoscan/config:/config
-      - smb_media:/media #media dir
-
 volumes:
   ts-data:
     driver: local
