@@ -3,9 +3,9 @@ port: 3030
 
 triggers:
 
-  # lidarr:
-  #   - name: lidarr   # /triggers/lidarr
-  #     priority: 6
+  lidarr:
+    - name: lidarr   # /triggers/lidarr
+      priority: 6
 
   radarr:
     - name: radarr   # /triggers/radarr
