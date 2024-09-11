@@ -17,7 +17,7 @@ services:
         - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
         - TS_HOSTNAME=${HOSTNAME}
       volumes:
-        - /opt/docker/volumes/adguard/ts-data:/var/lib/tailscale
+        - /opt/docker/volumes/adguardhome/ts-data:/var/lib/tailscale
         - /dev/net/tun:/dev/net/tun
       cap_add:
         - net_admin
