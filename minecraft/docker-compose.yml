@@ -9,7 +9,7 @@ services:
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=minecraft
     volumes:
-      - ts-data:/var/lib/tailscale
+      - /opt/docker/volumes/minecraft/ts-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
@@ -58,8 +58,8 @@ services:
       - ts-minecraft
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/minecraft/caddy-data:/data
+      - /opt/docker/volumes/minecraft/caddy-config:/config
     cap_add:
       - net_admin
     restart: always

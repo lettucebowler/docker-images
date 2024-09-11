@@ -17,7 +17,7 @@ services:
         - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
         - TS_HOSTNAME=${HOSTNAME}
       volumes:
-        - ts-data:/var/lib/tailscale
+        - /opt/docker/volumes/adguard/ts-data:/var/lib/tailscale
         - /dev/net/tun:/dev/net/tun
       cap_add:
         - net_admin
@@ -33,16 +33,8 @@ services:
     network_mode: service:ts-adguard
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/adguardhome/caddy-data:/data
+      - /opt/docker/volumes/adguardhome/caddy-data:/config
     cap_add:
       - net_admin
     restart: always
-
-volumes:
-  ts-data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local

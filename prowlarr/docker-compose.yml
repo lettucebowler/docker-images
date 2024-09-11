@@ -34,7 +34,7 @@ services:
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=prowlarr
     volumes:
-      - ts-prowlarr-data:/var/lib/tailscale
+      - /opt/docker/volumes/prowlarr/ts-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
@@ -48,8 +48,8 @@ services:
     network_mode: service:ts-prowlarr
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/prowlarr/caddy-data:/data
+      - /opt/docker/volumes/prowlarr/caddy-config:/config
     depends_on:
       - ts-prowlarr
     cap_add:
