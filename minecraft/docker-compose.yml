@@ -47,8 +47,8 @@ services:
       - /opt/docker/volumes/minecraft/papermc:/data
     restart: always
 
-  caddy-minecraft:
-    container_name: caddy-minecraft
+  minecraft:
+    container_name: minecraft-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
