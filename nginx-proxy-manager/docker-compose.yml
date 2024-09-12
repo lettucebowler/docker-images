@@ -3,7 +3,7 @@ services:
     image: "jc21/nginx-proxy-manager:latest"
     restart: always
     container_name: proxy
-    network_mode: service:tailsclae
+    network_mode: service:tailscale
     volumes:
       - /opt/docker/volumes/nginx-proxy-manager/proxy-data:/data
       - /opt/docker/volumes/nginx-proxy-manager/proxy-letsencrypt:/etc/letsencrypt
