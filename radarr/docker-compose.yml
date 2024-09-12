@@ -2,7 +2,7 @@ services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
-    network_mode: service:radarr-tailscale
+    network_mode: service:tailscale
     environment:
       - PUID=1000
       - PGID=1000
@@ -15,7 +15,7 @@ services:
 
   tailscale:
     image: tailscale/tailscale:latest
-    container_name: radarr-tailscale
+    container_name: tailscale
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
