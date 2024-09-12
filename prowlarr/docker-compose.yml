@@ -2,19 +2,18 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
-    network_mode: service:ts-prowlarr
+    network_mode: service:tailscale
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /opt/docker/volumes/prowlarr/config:/config
+      - /opt/docker/volumes/prowlarr/prowlarr-config:/config
     restart: always
 
   flaresolverr:
-    # DockerHub mirror flaresolverr/flaresolverr:latest
     image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
+    container_name: prowlarr-flaresolverr
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
@@ -24,10 +23,9 @@ services:
       - "${PORT:-8191}:8191"
     restart: always
 
-  ts-prowlarr:
+  tailscale:
     image: tailscale/tailscale:latest
-    container_name: ts-prowlarr
-    hostname: ts-prowlarr
+    container_name: prowlarr-tailscale
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
@@ -40,26 +38,16 @@ services:
       - net_admin
     restart: always
 
-  prowlarr-caddy:
+  caddy:
     container_name: prowlarr-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
-    network_mode: service:ts-prowlarr
+    network_mode: service:tailscale
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/prowlarr/caddy-data:/data
       - /opt/docker/volumes/prowlarr/caddy-config:/config
-    depends_on:
-      - ts-prowlarr
     cap_add:
       - net_admin
     restart: always
-
-volumes:
-  ts-prowlarr-data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
