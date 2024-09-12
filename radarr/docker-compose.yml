@@ -2,54 +2,47 @@ services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
-    network_mode: service:ts-radarr
+    network_mode: service:radarr-tailscale
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /opt/docker/volumes/radarr/config:/config
+      - /opt/docker/volumes/radarr/radarr-config:/config
       - smb_movies:/media/Movies
       - smb_downloads:/downloads
     restart: always
 
-  ts-radarr:
+  tailscale:
     image: tailscale/tailscale:latest
-    container_name: ts-radarr
-    hostname: ts-radarr
+    container_name: radarr-tailscale
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=radarr
     volumes:
-      - ts-radarr-data:/var/lib/tailscale
+      - /opt/docker/volumes/radarr/tailscale-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
     restart: always
 
-  caddy-radarr:
-    container_name: caddy-radarr
+  caddy:
+    container_name: radarr-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
-    network_mode: service:ts-radarr
+    network_mode: service:radarr-tailscale
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/radarr/caddy-data:/data
+      - /opt/docker/volumes/radarr/caddy-config:/config
     cap_add:
       - net_admin
     restart: always
 
 volumes:
-  ts-radarr-data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
   smb_downloads:
     driver: local
     driver_opts:
