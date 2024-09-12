@@ -31,7 +31,7 @@ services:
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=prowlarr
     volumes:
-      - /opt/docker/volumes/prowlarr/ts-data:/var/lib/tailscale
+      - /opt/docker/volumes/prowlarr/tailscale-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
