@@ -10,7 +10,7 @@ services:
     depends_on:
       - ts-lidarr
     volumes:
-      - /opt/docker/volumes/lidarr/config:/config
+      - /opt/docker/volumes/lidarr/lidarr-config:/config
       - smb_music:/media/music
       - smb_downloads:/downloads
     restart: always
@@ -25,7 +25,7 @@ services:
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=lidarr
     volumes:
-      - ts-lidarr-data:/var/lib/tailscale
+      - /opt/docker/volumes/lidarr/ts-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
@@ -39,19 +39,13 @@ services:
     network_mode: service:ts-lidarr
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/lidarr/caddy-data:/data
+      - /opt/docker/volumes/lidarr/caddy-config:/config
     cap_add:
       - net_admin
     restart: always
 
 volumes:
-  ts-lidarr-data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
   smb_downloads:
     driver: local
     driver_opts:
