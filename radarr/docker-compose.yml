@@ -33,7 +33,7 @@ services:
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
-    network_mode: service:radarr-tailscale
+    network_mode: service:tailscale
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/radarr/caddy-data:/data
