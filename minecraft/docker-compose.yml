@@ -47,7 +47,7 @@ services:
       - /opt/docker/volumes/minecraft/papermc:/data
     restart: always
 
-  minecraft:
+  caddy:
     container_name: minecraft-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
