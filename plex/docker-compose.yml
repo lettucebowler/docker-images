@@ -32,7 +32,7 @@ services:
     restart: always
 
   caddy:
-    container_name: caddy-plex
+    container_name: plex-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
