@@ -2,43 +2,42 @@ services:
   sonarr:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
-    network_mode: service:ts-sonarr
+    network_mode: service:tailscale
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /opt/docker/volumes/sonarr/config:/config
+      - /opt/docker/volumes/sonarr/sonarr-config:/config
       - smb_shows:/media/Shows
       - smb_downloads:/downloads
     restart: always
 
-  ts-sonarr:
+  tailscale:
     image: tailscale/tailscale:latest
-    container_name: ts-sonarr
-    hostname: ts-sonarr
+    container_name: sonarr-tailscale
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
       - TS_HOSTNAME=sonarr
     volumes:
-      - ts-sonarr-data:/var/lib/tailscale
+      - /opt/docker/volumes/sonarr/tailscale-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
     restart: always
 
-  sonarr-caddy:
+  caddy:
     container_name: sonarr-caddy
     image: iarekylew00t/caddy-cloudflare
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
-    network_mode: service:ts-sonarr
+    network_mode: service:tailscale
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - /opt/docker/volumes/sonarr/caddy-data:/data
+      - /opt/docker/volumes/sonarr/caddy-config:/config
     cap_add:
       - net_admin
     restart: always
