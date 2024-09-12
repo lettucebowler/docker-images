@@ -7,8 +7,6 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     network_mode: service:tailscale
-    depends_on:
-      - ts-lidarr
     volumes:
       - /opt/docker/volumes/lidarr/lidarr-config:/config
       - smb_music:/media/music
