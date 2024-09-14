@@ -49,12 +49,12 @@ services:
 
   caddy:
     container_name: minecraft-caddy
-    image: iarekylew00t/caddy-cloudflare
+    build: ../caddy
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
     network_mode: service:tailscale
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/minecraft/caddy-data:/data
       - /opt/docker/volumes/minecraft/caddy-config:/config
     cap_add:

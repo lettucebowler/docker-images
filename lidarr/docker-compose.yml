@@ -30,12 +30,12 @@ services:
 
   caddy:
     container_name: lidarr-caddy
-    image: iarekylew00t/caddy-cloudflare
+    build: ../caddy
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
     network_mode: service:tailscale
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/lidarr/caddy-data:/data
       - /opt/docker/volumes/lidarr/caddy-config:/config
     cap_add:
