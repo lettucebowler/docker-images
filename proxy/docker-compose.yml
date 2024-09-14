@@ -1,6 +1,6 @@
 services:
   caddy:
-    container_name: gitea-caddy
+    container_name: proxy-caddy
     build: ../caddy
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
