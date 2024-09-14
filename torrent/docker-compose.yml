@@ -35,12 +35,12 @@ services:
 
   caddy:
     container_name: torrent-caddy
-    image: iarekylew00t/caddy-cloudflare
+    build: ../caddy
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
     network_mode: service:tailscale
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/torrent/caddy-data:/data
       - /opt/docker/volumes/torrent/caddy-config:/config
     cap_add:
@@ -68,7 +68,7 @@ services:
       - DELUGE_PASS=${DELUGE_PASS}
     volumes:
       - /opt/docker/volumes/torrent/deluge-config:/config
-      - ./deluge/healthcheck.sh:/healthcheck.sh
+      - ./healthcheck.sh:/healthcheck.sh
       - smb_downloads:/downloads
     restart: always
     healthcheck:
