@@ -68,12 +68,6 @@ services:
       interval: 5m
 
 volumes:
-  ts-deluge-data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
   smb_downloads:
     driver: local
     driver_opts:
