@@ -47,14 +47,6 @@ services:
       - net_admin
     restart: always
 
-  nginx:
-    container_name: torrent-nginx
-    image: nginx
-    network_mode: service:tailscale
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: always
-
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: torrent-deluge
