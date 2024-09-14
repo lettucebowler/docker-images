@@ -33,7 +33,7 @@ services:
 
   caddy:
     container_name: plex-caddy
-    image: iarekylew00t/caddy-cloudflare
+    build: ../caddy
     environment:
       - CF_API_TOKEN=${CF_API_TOKEN}
     network_mode: service:tailscale
