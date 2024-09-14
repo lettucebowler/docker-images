@@ -38,7 +38,7 @@ services:
       - CF_API_TOKEN=${CF_API_TOKEN}
     network_mode: service:tailscale
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/plex/caddy-data:/data
       - /opt/docker/volumes/plex/caddy-config:/config
     cap_add:
