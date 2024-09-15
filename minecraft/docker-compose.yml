@@ -25,7 +25,7 @@ services:
       - EULA=TRUE
       - TYPE=PAPER
       - VERSION=1.20.1
-      - MODRINTH_PROJECTS=vane:WDidrIqU,essentialsx,veinminer:11brGK6s,chunky,thizzyz-tree-feller,bluemap,squaremap,dynmap
+      - MODRINTH_PROJECTS=vane:WDidrIqU,essentialsx,veinminer:11brGK6s,chunky,thizzyz-tree-feller,bluemap,squaremap,dynmap,worldedit
       - MODRINTH_DOWNLOAD_DEPENDENCIES=required
       - OPS=lettucebowler
       - WHITELIST=lettucebowler
