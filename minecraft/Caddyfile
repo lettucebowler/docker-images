@@ -13,3 +13,11 @@ squaremap.mc.lettucebowler.net {
 		resolvers 1.1.1.1
 	}
 }
+
+dynmap.mc.lettucebowler.net {
+	reverse_proxy minecraft:8123
+	tls {
+		dns cloudflare {env.CF_API_TOKEN}
+		resolvers 1.1.1.1
+	}
+}
