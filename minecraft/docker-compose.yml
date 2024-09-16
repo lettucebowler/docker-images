@@ -16,16 +16,16 @@ services:
     ports:
       - 25565:25565
 
-  minecraft:
+  papermc:
     build: .
-    container_name: minecraft
+    container_name: papermc
     image: itzg/minecraft-server
     network_mode: service:tailscale
     environment:
       - EULA=TRUE
       - TYPE=PAPER
       - VERSION=1.20.1
-      - MODRINTH_PROJECTS=vane:WDidrIqU,essentialsx,veinminer:11brGK6s,chunky,thizzyz-tree-feller,bluemap,squaremap,dynmap:AdtrWcU2,worldedit
+      - MODRINTH_PROJECTS=vane:WDidrIqU,essentialsx,veinminer:11brGK6s,chunky,thizzyz-tree-feller,squaremap,worldedit
       - MODRINTH_DOWNLOAD_DEPENDENCIES=required
       - OPS=lettucebowler
       - WHITELIST=lettucebowler
@@ -44,7 +44,7 @@ services:
       - ENABLE_ROLLING_LOGS=TRUE
       - VIEW_DISTANCE=12
     volumes:
-      - /opt/docker/volumes/minecraft/papermc:/data
+      - /opt/docker/volumes/minecraft/papermc-data:/data
     restart: always
 
   caddy:

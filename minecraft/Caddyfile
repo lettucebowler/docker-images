@@ -1,21 +1,5 @@
-bluemap.mc.lettucebowler.net {
-	reverse_proxy minecraft:8100
-	tls {
-		dns cloudflare {env.CF_API_TOKEN}
-		resolvers 1.1.1.1
-	}
-}
-
-squaremap.mc.lettucebowler.net {
+map.mc.lettucebowler.net {
 	reverse_proxy minecraft:8080
-	tls {
-		dns cloudflare {env.CF_API_TOKEN}
-		resolvers 1.1.1.1
-	}
-}
-
-dynmap.mc.lettucebowler.net {
-	reverse_proxy minecraft:8123
 	tls {
 		dns cloudflare {env.CF_API_TOKEN}
 		resolvers 1.1.1.1
