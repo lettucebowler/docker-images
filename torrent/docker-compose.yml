@@ -1,6 +1,6 @@
 services:
   gluetun:
-    image: qmcgaw/gluetun:v3.37
+    image: qmcgaw/gluetun:v3.39
     container_name: torrent-gluetun
     restart: always
     cap_add:
