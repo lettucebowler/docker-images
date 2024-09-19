@@ -24,7 +24,7 @@ services:
       - EULA=TRUE
       - TYPE=PAPER
       - VERSION=1.21.1
-      - MODRINTH_PROJECTS=vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller,squaremap,worldedit
+      - MODRINTH_PROJECTS=vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
       - MODRINTH_DOWNLOAD_DEPENDENCIES=required
       - DATAPACKS=https://cdn.modrinth.com/data/lWDHr9jE/versions/J5CxwkWM/tectonic-datapack-v2.4.0a.zip
       - OPS=lettucebowler
