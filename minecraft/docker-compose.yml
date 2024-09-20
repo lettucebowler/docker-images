@@ -57,6 +57,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - /opt/docker/volumes/minecraft/caddy-data:/data
       - /opt/docker/volumes/minecraft/caddy-config:/config
+      - /opt/docker/volumes/minecraft/papermc-data:/papermc-data
     cap_add:
       - net_admin
     restart: always
