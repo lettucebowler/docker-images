@@ -22,7 +22,7 @@ for f in /opt/docker/stacks/*;
       if test -f /mnt/truenas/backups/$(hostname).$ff.tar.lz4; then
         mv /mnt/truenas/backups/$(hostname).$ff.tar.lz4 /mnt/truenas/backups/old.$(hostname).$ff.tar.lz4
       fi
-      rsync -ah --progress /opt/docker/backup/backups/$(hostname).$ff.tar.lz4 /mnt/truenas/backups/
+      scp -v /opt/docker/backup/backups/$(hostname).$ff.tar.lz4 /mnt/truenas/backups/
       rm /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
       if test -f /mnt/truenas/backups/old.$(hostname).$ff.tar.lz4; then
         rm /mnt/truenas/backups/old.$(hostname).$ff.tar.lz4
