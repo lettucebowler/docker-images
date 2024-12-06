@@ -17,7 +17,8 @@ services:
     ports:
       - 8112:8112
       - 58846:58846
-
+    devices:
+      - /dev/net/tun:/dev/net/tun
   tailscale:
     image: tailscale/tailscale:latest
     container_name: torrent-tailscale
