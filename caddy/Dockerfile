@@ -4,5 +4,5 @@ RUN xcaddy build \
   --with github.com/caddy-dns/cloudflare \
   --with github.com/mholt/caddy-l4
 
-FROM caddy:2.9.0AS caddy
+FROM caddy:2.9.0 AS caddy
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
