@@ -15,7 +15,6 @@ services:
     restart: always
     ports:
       - 25565:25565
-      - 8080:8080
 
   papermc:
     build: .
@@ -27,7 +26,6 @@ services:
       - VERSION=1.21.1
       - MODRINTH_PROJECTS=vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
       - MODRINTH_DOWNLOAD_DEPENDENCIES=required
-      - DATAPACKS=https://cdn.modrinth.com/data/lWDHr9jE/versions/J5CxwkWM/tectonic-datapack-v2.4.0a.zip
       - OPS=lettucebowler
       - WHITELIST=lettucebowler
       - ENFORCE_WHITELIST=TRUE
