@@ -32,7 +32,7 @@ services:
       - DIFFICULTY=normal
       - ALLOW_NETHER=TRUE
       - SERVER_NAME=LettuceCraft
-      - MOTD=Lettuce and friends
+      - MOTD=Egg bites
       - ONLINE_MODE=TRUE
       - OVERRIDE_SERVER_PROPERTIES=TRUE
       - MAX_TICK_TIME=-1
