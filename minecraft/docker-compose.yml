@@ -15,6 +15,7 @@ services:
     restart: always
     ports:
       - 25565:25565
+      - 8080:8080
 
   papermc:
     build: .
