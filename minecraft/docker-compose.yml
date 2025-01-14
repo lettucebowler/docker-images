@@ -47,6 +47,14 @@ services:
       - /opt/docker/volumes/minecraft/papermc-data:/data
     restart: always
 
+  tunnel:
+    container_name: minecraft-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN}
+
   caddy:
     container_name: minecraft-caddy
     build: ../caddy
