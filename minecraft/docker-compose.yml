@@ -21,30 +21,30 @@ services:
     container_name: papermc
     network_mode: service:tailscale
     environment:
-      - EULA=TRUE
-      - TYPE=PAPER
-      - VERSION=1.21.1
-      - MODRINTH_PROJECTS=vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
-      - MODRINTH_DOWNLOAD_DEPENDENCIES=required
-      - OPS=lettucebowler
-      - WHITELIST: |
-          lettucebowler
-          gabby_stabby
-      - EXISTING_WHITELIST_FILE=MERGE
-      - ENFORCE_WHITELIST=TRUE
-      - DIFFICULTY=normal
-      - ALLOW_NETHER=TRUE
-      - SERVER_NAME=LettuceCraft
-      - MOTD=Egg bites
-      - ONLINE_MODE=TRUE
-      - OVERRIDE_SERVER_PROPERTIES=TRUE
-      - MAX_TICK_TIME=-1
-      - USE_AIKAR_FLAGS=TRUE
-      - TZ=America/Chicago
-      - INIT_MEMORY=2G
-      - MAX_MEMORY=8G
-      - ENABLE_ROLLING_LOGS=TRUE
-      - VIEW_DISTANCE=12
+      EULA: TRUE
+      TYPE: PAPER
+      VERSION: 1.21.1
+      MODRINTH_PROJECTS: vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
+      MODRINTH_DOWNLOAD_DEPENDENCIES: required
+      OPS: lettucebowler
+      WHITELIST: |
+        lettucebowler
+        gabby_stabby
+      EXISTING_WHITELIST_FILE: MERGE
+      ENFORCE_WHITELIST: TRUE
+      DIFFICULTY: normal
+      ALLOW_NETHER: TRUE
+      SERVER_NAME: LettuceCraft
+      MOTD: Egg bites
+      ONLINE_MODE: TRUE
+      OVERRIDE_SERVER_PROPERTIES: TRUE
+      MAX_TICK_TIME: -1
+      USE_AIKAR_FLAGS: TRUE
+      TZ: America/Chicago
+      INIT_MEMORY: 2G
+      MAX_MEMORY: 8G
+      ENABLE_ROLLING_LOGS: TRUE
+      VIEW_DISTANCE: 12
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
     restart: always
