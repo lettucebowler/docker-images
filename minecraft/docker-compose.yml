@@ -30,6 +30,7 @@ services:
       WHITELIST: |
         lettucebowler
         gabby_stabby
+        _kronk13_
       EXISTING_WHITELIST_FILE: MERGE
       ENFORCE_WHITELIST: TRUE
       DIFFICULTY: normal
