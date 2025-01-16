@@ -27,7 +27,10 @@ services:
       - MODRINTH_PROJECTS=vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
       - MODRINTH_DOWNLOAD_DEPENDENCIES=required
       - OPS=lettucebowler
-      - WHITELIST=lettucebowler
+      - WHITELIST: |
+          lettucebowler
+          gabby_stabby
+      - EXISTING_WHITELIST_FILE=MERGE
       - ENFORCE_WHITELIST=TRUE
       - DIFFICULTY=normal
       - ALLOW_NETHER=TRUE
