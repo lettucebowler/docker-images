@@ -31,6 +31,7 @@ services:
         lettucebowler
         gabby_stabby
         _kronk13_
+        ewald88
       EXISTING_WHITELIST_FILE: MERGE
       ENFORCE_WHITELIST: TRUE
       DIFFICULTY: normal
