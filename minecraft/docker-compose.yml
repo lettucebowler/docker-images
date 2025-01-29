@@ -32,12 +32,13 @@ services:
         gabby_stabby
         _kronk13_
         ewald88
+        dylanlee1998
       EXISTING_WHITELIST_FILE: MERGE
       ENFORCE_WHITELIST: TRUE
       DIFFICULTY: normal
       ALLOW_NETHER: TRUE
       SERVER_NAME: LettuceCraft
-      MOTD: Egg bites
+      MOTD: Eat lemon = sophisticated palate
       ONLINE_MODE: TRUE
       OVERRIDE_SERVER_PROPERTIES: TRUE
       MAX_TICK_TIME: -1
