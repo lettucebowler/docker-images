@@ -1,20 +1,20 @@
 services:
-  tailscale:
-    image: tailscale/tailscale:latest
-    container_name: minecraft-tailscale
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY}
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
-      - TS_HOSTNAME=minecraft
-    volumes:
-      - /opt/docker/volumes/minecraft/tailscale-data:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - net_admin
-    restart: always
-    ports:
-      - 25565:25565
+  # tailscale:
+  #   image: tailscale/tailscale:latest
+  #   container_name: minecraft-tailscale
+  #   environment:
+  #     - TS_AUTHKEY=${TS_AUTHKEY}
+  #     - TS_STATE_DIR=/var/lib/tailscale
+  #     - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+  #     - TS_HOSTNAME=minecraft
+  #   volumes:
+  #     - /opt/docker/volumes/minecraft/tailscale-data:/var/lib/tailscale
+  #     - /dev/net/tun:/dev/net/tun
+  #   cap_add:
+  #     - net_admin
+  #   restart: always
+  #   ports:
+  #     - 25565:25565
 
   papermc:
     build: .
@@ -23,8 +23,8 @@ services:
     environment:
       EULA: TRUE
       TYPE: PAPER
-      VERSION: 1.21.1
-      MODRINTH_PROJECTS: vane,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:jwgidqeq,squaremap,worldedit
+      VERSION: 1.21.4
+      MODRINTH_PROJECTS: vane:6ybR5YGE,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:MoQWr6cI,squaremap:DB47ULQI,worldedit
       MODRINTH_DOWNLOAD_DEPENDENCIES: required
       OPS: lettucebowler
       WHITELIST: |
@@ -38,7 +38,7 @@ services:
       DIFFICULTY: normal
       ALLOW_NETHER: TRUE
       SERVER_NAME: LettuceCraft
-      MOTD: Eat lemon = sophisticated palate
+      MOTD: Stove house
       ONLINE_MODE: TRUE
       OVERRIDE_SERVER_PROPERTIES: TRUE
       MAX_TICK_TIME: -1
