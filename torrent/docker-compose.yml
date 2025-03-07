@@ -1,6 +1,6 @@
 services:
   gluetun:
-    image: ghcr.io/qdm12/gluetun:3.40
+    image: ghcr.io/qdm12/gluetun:latest
     container_name: torrent-gluetun
     restart: always
     cap_add:
@@ -49,7 +49,7 @@ services:
     restart: always
 
   deluge:
-    image: ghcr.io/linuxserver/deluge
+    image: lscr.io/linuxserver/deluge:latest
     container_name: torrent-deluge
     network_mode: service:gluetun
     environment:
