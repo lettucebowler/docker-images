@@ -11,7 +11,6 @@ for f in /opt/docker/stacks/*;
     if test -d /opt/docker/volumes/$ff; then
       tar -cvf - -C /opt/docker/volumes/$ff . | lz4 - /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
     fi
-    docker compose -f $f/docker-compose.yml pull
     docker compose -f $f/docker-compose.yml up -d --remove-orphans
 done
 for f in /opt/docker/stacks/*;

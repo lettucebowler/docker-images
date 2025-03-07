@@ -14,7 +14,7 @@ services:
     restart: always
 
   tailscale:
-    image: tailscale/tailscale:latest
+    image: ghcr.io/tailscale/tailscale:latest
     container_name: radarr-tailscale
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
