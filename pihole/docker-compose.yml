@@ -6,6 +6,9 @@ services:
     environment:
       TZ: 'America/Chicago'
       FTLCONF_dns_listeningMode: 'all'
+    network_mode: service:tailscale
+    depends_on:
+      - pihole-tailscale
     volumes:
       - /opt/docker/volumes/pihole/pihole-data:/etc/pihole
     cap_add:
