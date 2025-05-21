@@ -6,10 +6,12 @@ services:
     environment:
       TZ: 'America/Chicago'
       FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_DNS_REVSERVERS: 'true,100.0.0.0/8,100.100.100.100,donkey-micro.ts.net'
+      FTLCONF_DNS_UPSTREAMS: '1.1.1.1;8.8.8.8'
     depends_on:
       - tailscale
-    volumes:
-      - /opt/docker/volumes/pihole/pihole-data:/etc/pihole
+    # volumes:
+    #   - /opt/docker/volumes/pihole/pihole-data:/etc/pihole
     cap_add:
       - NET_ADMIN
       - SYS_TIME
