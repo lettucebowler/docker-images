@@ -1,6 +1,6 @@
 {
 	dns cloudflare {env.CF_API_TOKEN}
-	ech metube.lettucebowler.net
+	ech
 }
 
 metube.lettucebowler.net {
