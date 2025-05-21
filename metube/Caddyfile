@@ -1,7 +1,8 @@
+{
+	dns cloudflare {env.CF_API_TOKEN}
+	ech ech.lettucebowler.net
+}
+
 metube.lettucebowler.net {
 	reverse_proxy :8081
-	tls {
-		dns cloudflare {env.CF_API_TOKEN}
-		resolvers 1.1.1.1
-	}
 }

@@ -7,7 +7,9 @@ services:
       TZ: 'America/Chicago'
       FTLCONF_dns_listeningMode: 'all'
       FTLCONF_DNS_REVSERVERS: 'true,100.0.0.0/8,100.100.100.100,donkey-micro.ts.net'
-      FTLCONF_DNS_UPSTREAMS: '1.1.1.1;8.8.8.8'
+      FTLCONF_DNS_UPSTREAMS: '172.30.0.2'
+    networks:
+      - dns
     depends_on:
       - tailscale
     volumes:
@@ -19,6 +21,14 @@ services:
     ports:
       - 3000:80
       - 53:53/udp
+  
+  unbound:
+    container_name: unbound
+    image: pedantic/unbound:latest
+    networks:
+      dns:
+        ipv4_address: 172.30.0.2
+    restart: unless-stopped
 
   tailscale:
     image: ghcr.io/tailscale/tailscale:latest
@@ -52,3 +62,11 @@ services:
     cap_add:
       - net_admin
     restart: unless-stopped
+
+networks:
+  dns:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/24
