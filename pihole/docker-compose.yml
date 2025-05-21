@@ -6,7 +6,6 @@ services:
     environment:
       TZ: 'America/Chicago'
       FTLCONF_dns_listeningMode: 'all'
-    network_mode: service:tailscale
     depends_on:
       - tailscale
     volumes:
@@ -15,6 +14,9 @@ services:
       - NET_ADMIN
       - SYS_TIME
       - SYS_NICE
+    ports:
+      - 3000:80
+      - 53:53
 
   tailscale:
     image: ghcr.io/tailscale/tailscale:latest
