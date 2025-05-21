@@ -30,23 +30,21 @@ services:
     cap_add:
       - net_admin
     restart: unless-stopped
-    ports:
-      - 8080:80
 
-  # caddy:
-  #   container_name: pihole-caddy
-  #   build: ../caddy
-  #   environment:
-  #     - CF_API_TOKEN=${CF_API_TOKEN}
-  #     - HOSTNAME=${HOSTNAME}
-  #     - IP_ADDRESS=${IP_ADDRESS}
-  #   network_mode: service:tailscale
-  #   depends_on:
-  #     - tailscale
-  #   volumes:
-  #     - ./Caddyfile:/etc/caddy/Caddyfile
-  #     - /opt/docker/volumes/pihole/caddy-data:/data
-  #     - /opt/docker/volumes/pihole/caddy-data:/config
-  #   cap_add:
-  #     - net_admin
-  #   restart: unless-stopped
+  caddy:
+    container_name: pihole-caddy
+    build: ../caddy
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+      - HOSTNAME=${HOSTNAME}
+      - IP_ADDRESS=${IP_ADDRESS}
+    network_mode: service:tailscale
+    depends_on:
+      - tailscale
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /opt/docker/volumes/pihole/caddy-data:/data
+      - /opt/docker/volumes/pihole/caddy-data:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped

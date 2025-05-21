@@ -5,3 +5,7 @@
 		resolvers 1.1.1.1
 	}
 }
+
+:80 {
+	reverse_proxy pihole:80
+}
