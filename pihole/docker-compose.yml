@@ -10,7 +10,7 @@ services:
       FTLCONF_DNS_UPSTREAMS: '172.30.0.2'
     networks:
       - dns
-      - pihole_default
+      - default
     depends_on:
       - tailscale
     volumes:
