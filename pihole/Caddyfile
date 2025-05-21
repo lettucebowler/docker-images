@@ -5,7 +5,3 @@
 		resolvers 1.1.1.1
 	}
 }
-
-// :3000 {
-// 	reverse_proxy {env.IP_ADDRESS}:3000
-// }
