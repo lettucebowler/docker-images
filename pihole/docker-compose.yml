@@ -16,7 +16,7 @@ services:
       - SYS_NICE
     ports:
       - 3000:80
-      - 53:53
+      - 53:53/udp
 
   tailscale:
     image: ghcr.io/tailscale/tailscale:latest
