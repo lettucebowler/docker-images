@@ -1,0 +1,45 @@
+services:
+  pihole:
+    image: ghcr.io/pi-hole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    environment:
+      TZ: 'America/Chicago'
+      FTLCONF_dns_listeningMode: 'all'
+    volumes:
+      - /opt/docker/volumes/pihole/pihole-data:/etc/pihole
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+
+  tailscale:
+    image: ghcr.io/tailscale/tailscale:latest
+    container_name: adguardhome-tailscale
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=${HOSTNAME}
+    volumes:
+      - /opt/docker/volumes/adguardhome/ts-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: unless-stopped
+
+  caddy:
+    container_name: adguardhome-caddy
+    build: ../caddy
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+      - HOSTNAME=${HOSTNAME}
+      - IP_ADDRESS=${IP_ADDRESS}
+    network_mode: service:tailscale
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /opt/docker/volumes/adguardhome/caddy-data:/data
+      - /opt/docker/volumes/adguardhome/caddy-data:/config
+    cap_add:
+      - net_admin
+    restart: unless-stopped
