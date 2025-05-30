@@ -1,0 +1,51 @@
+services:
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin
+    container_name: jellyfin
+    user: uid:gid
+    network_mode: 'host'
+    volumes:
+      - /opt/docker/volumes/jellyfin/jellyfin-config:/config
+      - smb_media:/media
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://jelly.lettucebowler.net
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  tailscale:
+    image: ghcr.io/tailscale/tailscale:latest
+    container_name: jellyfin-tailscale
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--reset --advertise-tags=tag:container
+      - TS_HOSTNAME=jellyfin
+    volumes:
+      - /opt/docker/volumes/jellyfin/tailscale-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+    restart: always
+
+  caddy:
+    container_name: jellyfin-caddy
+    build: ../caddy
+    environment:
+      - CF_API_TOKEN=${CF_API_TOKEN}
+    network_mode: service:tailscale
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /opt/docker/volumes/jellyfin/caddy-data:/data
+      - /opt/docker/volumes/jellyfin/caddy-config:/config
+    cap_add:
+      - net_admin
+    restart: always
+
+volumes:
+  smb_media:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: //192.168.10.99/Media
+      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
