@@ -1,0 +1,11 @@
+jelly.lettucebowler.net {
+	reverse_proxy 192.168.10.133:8096
+	tls {
+		dns cloudflare {env.CF_API_TOKEN}
+		resolvers 1.1.1.1
+	}
+}
+
+:32400 {
+	reverse_proxy 192.168.10.133:8096
+}
