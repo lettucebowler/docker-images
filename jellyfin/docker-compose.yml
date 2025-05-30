@@ -6,6 +6,8 @@ services:
     volumes:
       - /opt/docker/volumes/jellyfin/jellyfin-config:/config
       - smb_media:/media
+    devices:
+      - /dev/dri:/dev/dri
     restart: 'unless-stopped'
     environment:
       - JELLYFIN_PublishedServerUrl=http://jelly.lettucebowler.net
