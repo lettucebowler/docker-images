@@ -11,6 +11,8 @@ services:
       - /dev/dri:/dev/dri
     restart: 'unless-stopped'
     environment:
+      - PUID=0
+      - GUID=0
       - JELLYFIN_PublishedServerUrl=http://jelly.lettucebowler.net
     extra_hosts:
       - 'host.docker.internal:host-gateway'
