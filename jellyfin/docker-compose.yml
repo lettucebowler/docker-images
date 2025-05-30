@@ -3,6 +3,7 @@ services:
     image: ghcr.io/linuxserver/jellyfin
     container_name: jellyfin
     network_mode: 'host'
+    user: 0:0
     volumes:
       - /opt/docker/volumes/jellyfin/jellyfin-config:/config
       - smb_media:/media
