@@ -9,8 +9,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/radarr/radarr-config:/config
-      - smb_movies:/media/Movies
-      - smb_downloads:/downloads
+      - nfs_movies:/media/Movies
+      - nfs_downloads:/downloads
     restart: always
 
   tailscale:
@@ -43,15 +43,15 @@ services:
     restart: always
 
 volumes:
-  smb_downloads:
+  nfs_downloads:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Share/Downloads
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
-  smb_movies:
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"
+  nfs_movies:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Media/Movies
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+      type: nfs
+      device: ":/mnt/Media/Media/Movies"
+      o: "addr=192.168.10.99,nfsvers=4,rw"

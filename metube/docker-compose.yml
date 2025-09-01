@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     network_mode: service:tailscale
     volumes:
-      - smb_downloads:/downloads
+      - nfs_downloads:/downloads
 
   tailscale:
     image: ghcr.io/tailscale/tailscale:latest
@@ -37,9 +37,9 @@ services:
     restart: always
 
 volumes:
-  smb_downloads:
+  nfs_downloads:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Share/Downloads
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"

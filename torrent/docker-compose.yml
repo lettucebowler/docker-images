@@ -62,16 +62,16 @@ services:
     volumes:
       - /opt/docker/volumes/torrent/deluge-config:/config
       - ./healthcheck.sh:/healthcheck.sh
-      - smb_downloads:/downloads
+      - nfs_downloads:/downloads
     restart: always
     healthcheck:
       test: ["CMD", "bash", "/healthcheck.sh"]
       interval: 5m
-  
+
 volumes:
-  smb_downloads:
+  nfs_downloads:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Share/Downloads
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=0
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"

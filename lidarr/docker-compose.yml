@@ -9,8 +9,8 @@ services:
     network_mode: service:tailscale
     volumes:
       - /opt/docker/volumes/lidarr/lidarr-config:/config
-      - smb_music:/media/music
-      - smb_downloads:/downloads
+      - nfs_music:/media/music
+      - nfs_downloads:/downloads
     restart: always
 
   tailscale:
@@ -43,15 +43,15 @@ services:
     restart: always
 
 volumes:
-  smb_downloads:
+  nfs_downloads:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Share/Downloads
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
-  smb_music:
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"
+  nfs_music:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Media/Music
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+      type: nfs
+      device: ":/mnt/Media/Media/Music"
+      o: "addr=192.168.10.99,nfsvers=4,rw"

@@ -9,8 +9,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /opt/docker/volumes/sonarr/sonarr-config:/config
-      - smb_shows:/media/Shows
-      - smb_downloads:/downloads
+      - nfs_shows:/media/Shows
+      - nfs_downloads:/downloads
     restart: always
 
   tailscale:
@@ -43,15 +43,15 @@ services:
     restart: always
 
 volumes:
-  smb_downloads:
+  nfs_downloads:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Share/Downloads
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
-  smb_shows:
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"
+  nfs_shows:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Media/Shows
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+      type: nfs
+      device: ":/mnt/Media/Media/Shows"
+      o: "addr=192.168.10.99,nfsvers=4,rw"

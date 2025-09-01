@@ -9,7 +9,7 @@ services:
       - ADVERTISE_IP='https://192.168.10.133,https://plex.lettucebowler.net'
     volumes:
       - /opt/docker/volumes/plex/plex-config:/config
-      - smb_media:/media
+      - nfs_media:/media
       - /tmp:/transcode
     devices:
       - /dev/dri:/dev/dri
@@ -46,9 +46,9 @@ services:
     restart: always
 
 volumes:
-  smb_media:
+  nfs_media:
     driver: local
     driver_opts:
-      type: cifs
-      device: //192.168.10.99/Media
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},vers=3.0,uid=1000
+      type: nfs
+      device: ":/mnt/Media/Media"
+      o: "addr=192.168.10.99,nfsvers=4,rw"
