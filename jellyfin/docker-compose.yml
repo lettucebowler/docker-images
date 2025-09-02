@@ -3,7 +3,7 @@ services:
     image: ghcr.io/linuxserver/jellyfin
     container_name: jellyfin
     network_mode: 'host'
-    user: 0:0
+    user: 1000:1000
     volumes:
       - /opt/docker/volumes/jellyfin/jellyfin-config:/config
       - nfs_media:/media
@@ -11,8 +11,8 @@ services:
       - /dev/dri:/dev/dri
     restart: 'unless-stopped'
     environment:
-      - PUID=0
-      - GUID=0
+      - PUID=1000
+      - GUID=1000
       - JELLYFIN_PublishedServerUrl=http://jelly.lettucebowler.net
     extra_hosts:
       - 'host.docker.internal:host-gateway'
