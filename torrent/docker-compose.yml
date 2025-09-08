@@ -53,8 +53,8 @@ services:
     container_name: torrent-deluge
     network_mode: service:gluetun
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Chicago
       - DELUGE_LOGLEVEL=error #optional
       - DELUGE_USER=${DELUGE_USER}
