@@ -68,25 +68,6 @@ services:
       test: ["CMD", "bash", "/healthcheck.sh"]
       interval: 5m
 
-  transmission:
-    image: lscr.io/linuxserver/transmission:latest
-    container_name: torrent-transmission
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      # - TRANSMISSION_WEB_HOME= #optional
-      # - USER= #optional
-      # - PASS= #optional
-      # - WHITELIST= #optional
-      # - PEERPORT= #optional
-      # - HOST_WHITELIST= #optional
-    volumes:
-      - /opt/docker/volumes/torrent/transmission-config:/config
-      - nfs_downloads:/downloads
-    network_mode: service:gluetun
-    restart: unless-stopped
-
 volumes:
   nfs_downloads:
     driver: local
