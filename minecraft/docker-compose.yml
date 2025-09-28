@@ -17,7 +17,7 @@ services:
       - 25565:25565
 
   papermc:
-    build: .
+    image: ghcr.io/itzg/minecraft-server:java21-graalvm
     container_name: papermc
     network_mode: service:tailscale
     environment:
@@ -44,7 +44,7 @@ services:
       MAX_TICK_TIME: -1
       USE_AIKAR_FLAGS: TRUE
       TZ: America/Chicago
-      INIT_MEMORY: 2G
+      INIT_MEMORY: 6G
       MAX_MEMORY: 24G
       ENABLE_ROLLING_LOGS: TRUE
       VIEW_DISTANCE: 12
