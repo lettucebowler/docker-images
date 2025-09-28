@@ -18,6 +18,14 @@ deluge.lettucebowler.net {
 	}
 }
 
+transmission.lettucebowler.net {
+	reverse_proxy gluetun:9091
+}
+
+:9091 {
+	reverse_proxy gluetun:9091
+}
+
 :8112 {
 	reverse_proxy gluetun:8112
 }
