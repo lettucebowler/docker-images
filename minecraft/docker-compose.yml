@@ -24,7 +24,7 @@ services:
       EULA: TRUE
       TYPE: PAPER
       VERSION: 1.21.4
-      MODRINTH_PROJECTS: vane:6ybR5YGE,essentialsx:puUfqBpY,chunky,thizzyz-tree-feller:MoQWr6cI,squaremap:DB47ULQI,worldedit
+      MODRINTH_PROJECTS: vane:6ybR5YGE,essentialsx:Oa9ZDzZq,chunky,thizzyz-tree-feller:MoQWr6cI,squaremap:DB47ULQI,worldedit
       MODRINTH_DOWNLOAD_DEPENDENCIES: required
       OPS: lettucebowler
       WHITELIST: |
