@@ -1,9 +1,14 @@
+#!/bin/bash
 cd /opt/docker/volumes
 ff=""
-for f in /opt/docker/stacks/*;
+path="/opt/docker/stacks/*"
+if [[ -n "$1" ]]; then
+    path="/opt/docker/stacks/$1"
+fi
+for f in $path;
   do
     ff=${f##*/}
-    echo Updating up ${ff}
+    echo Updating ${ff}
     docker compose -f $f/docker-compose.yml down
     docker compose -f $f/docker-compose.yml pull
     docker compose -f $f/docker-compose.yml up -d --remove-orphans

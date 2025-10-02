@@ -1,6 +1,11 @@
+#!/bin/bash
 cd /opt/docker/volumes
 ff=""
-for f in /opt/docker/stacks/*;
+path="/opt/docker/stacks/*"
+if [[ -n "$1" ]]; then
+    path="/opt/docker/stacks/$1"
+fi
+for f in $path;
   do
     ff=${f##*/}
     echo Backing up ${ff}
@@ -13,7 +18,8 @@ for f in /opt/docker/stacks/*;
     fi
     docker compose -f $f/docker-compose.yml up -d --remove-orphans
 done
-for f in /opt/docker/stacks/*;
+# two loops because I don't want to leave the service down while the backup is being transferred over the network.
+for f in $path;
   do
     ff=${f##*/}
     if test -d /opt/docker/volumes/$ff; then
@@ -28,4 +34,3 @@ for f in /opt/docker/stacks/*;
       fi
     fi
 done
-docker system prune -af
