@@ -23,8 +23,8 @@ services:
     environment:
       EULA: TRUE
       TYPE: PAPER
-      VERSION: 1.21.4
-      MODRINTH_PROJECTS: vane:6ybR5YGE,essentialsx:Oa9ZDzZq,chunky,thizzyz-tree-feller:MoQWr6cI,squaremap:DB47ULQI,worldedit
+      VERSION: 1.21.7
+      MODRINTH_PROJECTS: vane,essentialsx,chunky,tree-cutter+,squaremap,worldedit
       MODRINTH_DOWNLOAD_DEPENDENCIES: required
       OPS: lettucebowler
       WHITELIST: |
@@ -44,10 +44,13 @@ services:
       MAX_TICK_TIME: -1
       USE_AIKAR_FLAGS: TRUE
       TZ: America/Chicago
-      INIT_MEMORY: 6G
-      MAX_MEMORY: 24G
+      INIT_MEMORY: 2G
+      MAX_MEMORY: 8G
       ENABLE_ROLLING_LOGS: TRUE
       VIEW_DISTANCE: 12
+      plugins: |
+        https://github.com/dmulloy2/ProtocolLib/releases/download/5.4.0/ProtocolLib.jar
+        https://cdn.modrinth.com/data/Vebnzrzj/versions/ZPtLedoF/LuckPerms-Bukkit-5.5.0.jar
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
     restart: always
