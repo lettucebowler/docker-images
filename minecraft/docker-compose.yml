@@ -24,7 +24,7 @@ services:
       EULA: TRUE
       TYPE: PAPER
       VERSION: 1.21.7
-      MODRINTH_PROJECTS: vane,essentialsx,chunky,tree-cutter+,squaremap,worldedit
+      MODRINTH_PROJECTS: vane,chunky,tree-cutter+,squaremap,worldedit
       MODRINTH_DOWNLOAD_DEPENDENCIES: required
       OPS: lettucebowler
       WHITELIST: |
@@ -51,6 +51,7 @@ services:
       plugins: |
         https://github.com/dmulloy2/ProtocolLib/releases/download/5.4.0/ProtocolLib.jar
         https://cdn.modrinth.com/data/Vebnzrzj/versions/ZPtLedoF/LuckPerms-Bukkit-5.5.0.jar
+        https://cdn.modrinth.com/data/hXiIvTyT/versions/Oa9ZDzZq/EssentialsX-2.21.2.jar
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
     restart: always
