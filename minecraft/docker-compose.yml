@@ -48,7 +48,7 @@ services:
       MAX_MEMORY: 8G
       ENABLE_ROLLING_LOGS: TRUE
       VIEW_DISTANCE: 12
-      plugins: |
+      PLUGINS: |
         https://github.com/dmulloy2/ProtocolLib/releases/download/5.4.0/ProtocolLib.jar
         https://cdn.modrinth.com/data/Vebnzrzj/versions/ZPtLedoF/LuckPerms-Bukkit-5.5.0.jar
         https://cdn.modrinth.com/data/hXiIvTyT/versions/Oa9ZDzZq/EssentialsX-2.21.2.jar
