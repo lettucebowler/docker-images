@@ -65,6 +65,7 @@ services:
         https://cdn.modrinth.com/data/Vebnzrzj/versions/ZPtLedoF/LuckPerms-Bukkit-5.5.0.jar
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
+      - ./plugins:/plugins
     restart: always
 
   tunnel:
