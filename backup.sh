@@ -14,6 +14,9 @@ for f in $path;
       rm /opt/docker/backup/backups/$ff.tar.lz4
     fi
     if test -d /opt/docker/volumes/$ff; then
+      if test -f /opt/docker/backup/backups/$(hostname).$ff.tar.lz4; then
+        rm /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
+      fi
       tar -cvf - -C /opt/docker/volumes/$ff . | lz4 - /opt/docker/backup/backups/$(hostname).$ff.tar.lz4
     fi
     docker compose -f $f/docker-compose.yml up -d --remove-orphans
