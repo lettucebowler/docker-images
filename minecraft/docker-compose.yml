@@ -43,7 +43,7 @@ services:
       USE_AIKAR_FLAGS: TRUE
       TZ: America/Chicago
       INIT_MEMORY: 2G
-      MAX_MEMORY: 8G
+      MAX_MEMORY: 16G
       ENABLE_ROLLING_LOGS: TRUE
       VIEW_DISTANCE: 12
       PLUGINS: |
