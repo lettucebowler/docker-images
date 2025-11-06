@@ -31,6 +31,7 @@ services:
         _kronk13_
         ewald88
         dylanlee1998
+        MrsMelatonin
       EXISTING_WHITELIST_FILE: MERGE
       ENFORCE_WHITELIST: TRUE
       DIFFICULTY: normal
