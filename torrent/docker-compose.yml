@@ -95,7 +95,7 @@ services:
     volumes:
       - /opt/docker/volumes/torrent/transmission-config:/config
       - nfs_downloads:/downloads
-      - nfs_watch_dir::/watch
+      - nfs_watch_dir:/watch
     restart: unless-stopped
 
 volumes:
