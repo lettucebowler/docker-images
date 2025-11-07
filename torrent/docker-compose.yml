@@ -95,6 +95,7 @@ services:
     volumes:
       - /opt/docker/volumes/torrent/transmission-config:/config
       - nfs_downloads:/downloads
+      - nfs_watch_dir::/watch
     restart: unless-stopped
 
 volumes:
@@ -103,4 +104,10 @@ volumes:
     driver_opts:
       type: nfs
       device: ":/mnt/Media/Share/Downloads"
+      o: "addr=192.168.10.99,nfsvers=4,rw"
+  nfs_watch_dir:
+    driver: local
+    driver_opts:
+      type: nfs
+      device: ":/mnt/Media/Share/Downloads/torrents"
       o: "addr=192.168.10.99,nfsvers=4,rw"
