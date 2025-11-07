@@ -18,8 +18,6 @@ services:
       - 8112:8112
       - 58846:58846
       - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
     devices:
       - /dev/net/tun:/dev/net/tun
   tailscale:
@@ -51,25 +49,25 @@ services:
       - net_admin
     restart: always
 
-  deluge:
-    image: lscr.io/linuxserver/deluge:latest
-    container_name: torrent-deluge
-    network_mode: service:gluetun
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-      - DELUGE_LOGLEVEL=error #optional
-      - DELUGE_USER=${DELUGE_USER}
-      - DELUGE_PASS=${DELUGE_PASS}
-    volumes:
-      - /opt/docker/volumes/torrent/deluge-config:/config
-      - ./healthcheck.sh:/healthcheck.sh
-      - nfs_downloads:/downloads
-    restart: always
-    healthcheck:
-      test: ["CMD", "bash", "/healthcheck.sh"]
-      interval: 5m
+  # deluge:
+  #   image: lscr.io/linuxserver/deluge:latest
+  #   container_name: torrent-deluge
+  #   network_mode: service:gluetun
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=America/Chicago
+  #     - DELUGE_LOGLEVEL=error #optional
+  #     - DELUGE_USER=${DELUGE_USER}
+  #     - DELUGE_PASS=${DELUGE_PASS}
+  #   volumes:
+  #     - /opt/docker/volumes/torrent/deluge-config:/config
+  #     - ./healthcheck.sh:/healthcheck.sh
+  #     - nfs_downloads:/downloads
+  #   restart: always
+  #   healthcheck:
+  #     test: ["CMD", "bash", "/healthcheck.sh"]
+  #     interval: 5m
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -80,7 +78,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
+      - TORRENTING_PORT=11929
     volumes:
       - /opt/docker/volumes/torrent/qbittorrent-config:/config
       - nfs_downloads:/downloads
