@@ -17,6 +17,9 @@ services:
     ports:
       - 8112:8112
       - 58846:58846
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
     devices:
       - /dev/net/tun:/dev/net/tun
   tailscale:
@@ -67,6 +70,21 @@ services:
     healthcheck:
       test: ["CMD", "bash", "/healthcheck.sh"]
       interval: 5m
+
+    qbittorrent:
+      image: lscr.io/linuxserver/qbittorrent:latest
+      container_name: torrent-qbittorrent
+      network_mode: service:gluetun
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Etc/UTC
+        - WEBUI_PORT=8080
+        - TORRENTING_PORT=6881
+      volumes:
+        - /opt/docker/volumes/torrent/qbittorrent-config:/config
+        - nfs_downloads:/downloads
+      restart: unless-stopped
 
 volumes:
   nfs_downloads:
