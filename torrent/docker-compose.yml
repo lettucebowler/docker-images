@@ -15,9 +15,6 @@ services:
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
     ports:
-      - 8112:8112
-      - 58846:58846
-      - 8080:8080
       - 9091:9091
     devices:
       - /dev/net/tun:/dev/net/tun
@@ -49,41 +46,6 @@ services:
     cap_add:
       - net_admin
     restart: always
-
-  # deluge:
-  #   image: lscr.io/linuxserver/deluge:latest
-  #   container_name: torrent-deluge
-  #   network_mode: service:gluetun
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=America/Chicago
-  #     - DELUGE_LOGLEVEL=error #optional
-  #     - DELUGE_USER=${DELUGE_USER}
-  #     - DELUGE_PASS=${DELUGE_PASS}
-  #   volumes:
-  #     - /opt/docker/volumes/torrent/deluge-config:/config
-  #     - ./healthcheck.sh:/healthcheck.sh
-  #     - nfs_downloads:/downloads
-  #   restart: always
-  #   healthcheck:
-  #     test: ["CMD", "bash", "/healthcheck.sh"]
-  #     interval: 5m
-
-  # qbittorrent:
-  #   image: lscr.io/linuxserver/qbittorrent:latest
-  #   container_name: torrent-qbittorrent
-  #   network_mode: service:gluetun
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #     - WEBUI_PORT=8080
-  #     - TORRENTING_PORT=11929
-  #   volumes:
-  #     - /opt/docker/volumes/torrent/qbittorrent-config:/config
-  #     - nfs_downloads:/downloads
-  #   restart: unless-stopped
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: torrent-transmission
