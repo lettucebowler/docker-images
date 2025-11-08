@@ -54,7 +54,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - PEERPORT=11929
+      - PEERPORT=${WIREGUARD_FORWARDED_PORT}
     volumes:
       - /opt/docker/volumes/torrent/transmission-config:/config
       - nfs_downloads:/downloads
