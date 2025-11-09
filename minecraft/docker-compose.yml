@@ -23,7 +23,7 @@ services:
       ONLINE_MODE: TRUE
       OVERRIDE_SERVER_PROPERTIES: TRUE
       MAX_TICK_TIME: -1
-      USE_AIKAR_FLAGS: TRUE
+      USE_AIKAR_FLAGS: FALSE
       TZ: America/Chicago
       INIT_MEMORY: 2G
       MAX_MEMORY: 16G
