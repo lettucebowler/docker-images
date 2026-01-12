@@ -5,7 +5,7 @@ services:
     environment:
       EULA: TRUE
       TYPE: PAPER
-      VERSION: 1.21.10
+      VERSION: 1.21.11
       OPS: lettucebowler
       WHITELIST: |
         lettucebowler
@@ -19,7 +19,7 @@ services:
       DIFFICULTY: normal
       ALLOW_NETHER: TRUE
       SERVER_NAME: LettuceCraft
-      MOTD: Now with copper golems
+      MOTD: Pokey stick
       ONLINE_MODE: TRUE
       OVERRIDE_SERVER_PROPERTIES: TRUE
       MAX_TICK_TIME: -1
