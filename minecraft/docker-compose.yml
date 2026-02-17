@@ -45,7 +45,6 @@ services:
         https://cdn.modrinth.com/data/OhduvhIc/versions/WXSTM4Su/veinminer-paper-2.5.3.jar
         https://cdn.modrinth.com/data/YrkmSvXh/versions/YYlFnNur/TreeFeller-1.27.0.jar
         https://cdn.modrinth.com/data/Vebnzrzj/versions/OrIs0S6b/LuckPerms-Bukkit-5.5.17.jar
-        https://github.com/Framepersecond/Dash/releases/download/Release/dash-1.0.0.jar
       JVM_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+AlwaysActAsServerClassMachine -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+UseNUMA -XX:NmethodSweepActivity=1 -XX:ReservedCodeCacheSize=400M -XX:NonNMethodCodeHeapSize=12M -XX:ProfiledCodeHeapSize=194M -XX:NonProfiledCodeHeapSize=194M -XX:-DontCompileHugeMethods -XX:MaxNodeLimit=240000 -XX:NodeLimitFudgeFactor=8000 -XX:+UseVectorCmov -XX:+PerfDisableSharedMem -XX:+UseFastUnorderedTimeStamps -XX:+UseCriticalJavaThreadPriority -XX:ThreadPriorityPolicy=1 -XX:+UseZGC -XX:AllocatePrefetchStyle=1 -XX:-ZProactive"
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
