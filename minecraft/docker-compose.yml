@@ -1,6 +1,6 @@
 services:
   papermc:
-    image: ghcr.io/itzg/minecraft-server:java21-graalvm
+    image: ghcr.io/itzg/minecraft-server:java25
     container_name: papermc
     environment:
       EULA: TRUE
