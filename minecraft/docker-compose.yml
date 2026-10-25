@@ -39,7 +39,14 @@ services:
         https://cdn.modrinth.com/data/Vebnzrzj/versions/b0mk8uS6/LuckPerms-Bukkit-5.5.71.jar
         https://cdn.modrinth.com/data/P1OZGk5p/versions/5WgnasGG/ViaVersion-5.12.1.jar
         https://cdn.modrinth.com/data/84zcagOb/versions/korVu0dL/voxy-server-side-paper.jar
-        https://cdn.modrinth.com/data/RfE1BSdK/versions/JwSofX5c/OnePlayerSleep-4.1.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-admin-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-bedtime-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-core-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-enchantments-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-permissions-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-portals-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-regions-1.23.0.jar
+        https://github.com/oddlama/vane/releases/download/v1.23.0/vane-trifles-1.23.0.jar
       JVM_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+AlwaysActAsServerClassMachine -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+UseNUMA -XX:NmethodSweepActivity=1 -XX:ReservedCodeCacheSize=400M -XX:NonNMethodCodeHeapSize=12M -XX:ProfiledCodeHeapSize=194M -XX:NonProfiledCodeHeapSize=194M -XX:-DontCompileHugeMethods -XX:MaxNodeLimit=240000 -XX:NodeLimitFudgeFactor=8000 -XX:+UseVectorCmov -XX:+PerfDisableSharedMem -XX:+UseFastUnorderedTimeStamps -XX:+UseCriticalJavaThreadPriority -XX:ThreadPriorityPolicy=1 -XX:+UseZGC -XX:AllocatePrefetchStyle=1 -XX:-ZProactive"
     volumes:
       - /opt/docker/volumes/minecraft/papermc-data:/data
